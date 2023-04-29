@@ -106,7 +106,7 @@ public class Prog4 {
 			stmt.executeUpdate(insertQuery);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error adding record");
 			}
 			
 			
@@ -128,7 +128,7 @@ public class Prog4 {
 			stmt.executeUpdate(insertQuery);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error adding record");
 			}
 			
 			
@@ -144,7 +144,7 @@ public class Prog4 {
 			stmt.executeUpdate(insertQuery);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error adding record");
 			}
 			
 		}
@@ -159,7 +159,7 @@ public class Prog4 {
 				stmt.executeUpdate(insertQuery);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error adding record");
 			}
 		}
 		else if (recordType.equals("Employee")) {
@@ -173,7 +173,7 @@ public class Prog4 {
 	            String insertQuery = "INSERT INTO Employee (EmployeeID, EmpName, DOB) VALUES (" + employeeID + ",'" + employeeName + "','" + dob + "')";
 	            stmt.executeUpdate(insertQuery);
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error adding record");
 	        }
 	    } else if (recordType.equals("Responsibility")) {
 	        try {
@@ -190,7 +190,7 @@ public class Prog4 {
 	            String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, Day, startTime, stopTime) VALUES (" + employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
 	            stmt.executeUpdate(insertQuery);
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error adding record");
 	        }
 	    } else if (recordType.equals("Club460")) {
 	        try {
@@ -201,7 +201,7 @@ public class Prog4 {
 	            String insertQuery = "INSERT INTO Club460 (CustomerNo, Points) VALUES (" + customerNo + "," + points + ")";
 	            stmt.executeUpdate(insertQuery);
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error adding record");
 	        }
 	    }
 		
@@ -216,7 +216,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println("Deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    }
 	    else if (recordType.equals("Booking")) {
@@ -227,7 +227,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println("Deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    }
 	    else if (recordType.equals("Amenity")) {
@@ -238,7 +238,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println("Deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    }
 	    else if (recordType.equals("RoomDetails")) {
@@ -249,7 +249,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println("Deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    }
 	    else if (recordType.equals("Employee")) {
@@ -260,7 +260,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    } else if (recordType.equals("Responsibility")) {
 	        try {
@@ -272,7 +272,7 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	System.out.println("Error deleting record");
 	        }
 	    } else if (recordType.equals("Club460")) {
 	        try {
@@ -282,12 +282,43 @@ public class Prog4 {
 	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
 	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	            System.out.println("Error deleting record");
 	        }
 	    }
 	}
 	
 	
+	public static void addPayment(Connection dbconn, Statement stmt,  int customerNo) throws SQLException {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter mode of payment (CC/Checking/Cash):");
+		String mode = scanner.next();
+		if (mode.equals("Checking") || mode.equals("CC")) {
+			System.out.print("\nEnter CC or Checking account number:");
+			int cardNo = scanner.nextInt();
+			int discount = 0;
+			if (cardNumber.containsKey(mode)) {
+				discount = cardDiscount.get(cardNumber.get(mode));
+			}
+			String insertQuery = "INSERT INTO Payment VALUES ("+mode+","+cardNo+","+discount+")";
+			stmt.executeQuery(insertQuery);
+		}
+	}
+	 
+	public static void addUsedAmenity(Connection dbconn, Statement stmt, ResultSet answer) {
+	    try {
+	    	Scanner scanner = new Scanner(System.in);
+	        System.out.print("Enter Booking ID: ");
+	        int bookingID = scanner.nextInt();
+	        System.out.print("Enter Amenity ID: ");
+	        int amenityID = scanner.nextInt();
+	        System.out.print("Enter Quantity: ");
+	        int quantity = scanner.nextInt();
+	        String insertQuery = "INSERT INTO UsedAmenity (BookingID, AmenityID, Quantity) VALUES (" + bookingID + "," + amenityID + "," + quantity + ")";
+	        stmt.executeUpdate(insertQuery);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	public static void finalBill(Connection dbconn, Statement stmt, ResultSet answer) {
 		Boolean isMember = false;
@@ -332,7 +363,7 @@ public class Prog4 {
 				}
 			}
 			
-			query = "SELECT COUNT(*) AS count FROM Payment WHERE CustomerNo = "+customerNo;
+			query = "SELECT * FROM Payment WHERE CustomerNo = "+customerNo;
 			answer = stmt.executeQuery(query);
 			int discount = 0;
 			String discountString = "";
@@ -340,10 +371,13 @@ public class Prog4 {
 				if (answer.getString("Mode").equals("CC")) {
 					Integer ccNum = answer.getInt("CardNo") % 10000;
 					if (cardNumber.get(ccNum) != null) {
-						discount += cardDiscount.get(cardNumber.get(ccNum));
+						discount += answer.getInt("discount");
 						discountString += cardDiscount.get(ccNum);
 					}
 				}
+			}
+			else {
+				addPayment(dbconn, stmt, customerNo);
 			}
 			String customerName = "";
 			
