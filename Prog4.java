@@ -66,13 +66,13 @@ public class Prog4 {
             System.exit(-1);
 
     }  
-	   
-	    mainMenu(dbconn, stmt, answer);
+	    Scanner scanner = new Scanner(System.in);
+	    mainMenu(dbconn, stmt, answer, scanner);
 	    
 	    
 	}
 	
-	public static void mainMenu(Connection dbconn, Statement stmt, ResultSet answer) {
+	public static void mainMenu(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
 		System.out.println("What do you wanna do today? (Type a number from (1-5) to specify)\n");
 		System.out.println("1. Add / Remove / Update Customer Details");
 		System.out.println("2. Add / Remove / Update Booking Details");
@@ -82,13 +82,90 @@ public class Prog4 {
 		
 	}
 	
-	public static void predefinedQueriesMenu(Connection dbconn, Statement stmt, ResultSet answer) {
+	public static void predefinedQueriesMenu(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
 		System.out.println("1. Print a current bill (total $) for a customer for their stay and all unpaid amenities.");
 		System.out.println("2. Customers that are currently staying at the hotel.");
 		System.out.println("3. Print the schedule of staff.");
 		System.out.println("4. Print the average ratings of different amenities");
 		System.out.println("5. Query of choice");
 	}
+	
+	
+	public static void addRecord(Connection dbconn, Statement stmt, ResultSet answer, String recordType, Scanner scanner) {
+		if (recordType.equals("Customer")) {
+			try {
+			System.out.print("Enter CustomerNo.:");
+			int customerNo = scanner.nextInt();
+			System.out.print("\nName");
+			String name = scanner.next();
+			System.out.print("\nAddress:");
+			String address = scanner.next();
+			System.out.print("\nIs customer a student? (Y/N):");
+			String isAStudent = scanner.next();
+			String insertQuery = "INSERT INTO Customer (CustomerNo, Name, Address, Student) VALUES "+customerNo+ ","+name+","+address+","+isAStudent+")";
+			stmt.executeUpdate(insertQuery);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if (recordType.equals("Booking")) {
+			try {
+			System.out.print("Enter CustomerNo.:");
+			int customerNo = scanner.nextInt();
+			System.out.print("\nBookingId:");
+			int bookingId = scanner.nextInt();
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+			System.out.print("\nStart Date (yyyy-MM-dd):");
+			String dateFrom= scanner.next();
+			dateFrom = dateFormat1.format(dateFrom);
+			System.out.print("\nEnd Date (yyyy-MM-dd):");
+			String dateTo = scanner.next();
+			dateTo = dateFormat1.format(dateTo);
+			String insertQuery = "INSERT INTO Booking (CustomerNo, BookingID, dateFrom, dateTo) VALUES "+customerNo+ ","+bookingId+",TO_DATE("+dateFrom+"),TO_DATE("+dateTo+"))";
+			stmt.executeUpdate(insertQuery);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		if (recordType.equals("Amenity")) {
+			try {
+			System.out.print("Enter AmenityID:");
+			int amenityId = scanner.nextInt();
+			System.out.print("\nEnter price of amenity:");
+			int price = scanner.nextInt();
+			String insertQuery = "INSERT INTO Amenity VALUES ("+amenityId+","+price+")";
+			stmt.executeUpdate(insertQuery);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		if (recordType.equals("RoomDetails")) {
+			try {
+				System.out.print("Enter RoomID:");
+				int roomId = scanner.nextInt();
+				System.out.print("\nEnter price of Room:");
+				int price = scanner.nextInt();
+				String insertQuery = "INSERT INTO Room VALUES ("+roomId+","+price+")";
+				stmt.executeUpdate(insertQuery);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 	
 	public static void finalBill(Connection dbconn, Statement stmt, ResultSet answer) {
 		Boolean isMember = false;
@@ -200,6 +277,8 @@ public class Prog4 {
 		}
 		
 	}
+	
+	
 	
 	
 }
