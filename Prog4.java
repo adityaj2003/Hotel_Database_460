@@ -309,9 +309,9 @@ public class Prog4 {
 	    	Scanner scanner = new Scanner(System.in);
 	        System.out.print("Enter Booking ID: ");
 	        int bookingID = scanner.nextInt();
-	        System.out.print("Enter Amenity ID: ");
+	        System.out.print("\nEnter Amenity ID: ");
 	        int amenityID = scanner.nextInt();
-	        System.out.print("Enter Quantity: ");
+	        System.out.print("\nEnter Quantity: ");
 	        int quantity = scanner.nextInt();
 	        String insertQuery = "INSERT INTO UsedAmenity (BookingID, AmenityID, Quantity) VALUES (" + bookingID + "," + amenityID + "," + quantity + ")";
 	        stmt.executeUpdate(insertQuery);
@@ -319,6 +319,131 @@ public class Prog4 {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+	
+	public static void updateRecord(Connection dbconn, Statement stmt, ResultSet answer, String recordType, Scanner scanner) {
+	    try {
+	        
+	        if (recordType.equals("Customer")) {
+	        	System.out.print("Enter the customerNo of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated name: ");
+	            String name = scanner.next();
+	            System.out.print("\nEnter updated address: ");
+	            String address = scanner.next();
+	            System.out.print("\nIs the customer a student? (Y/N): ");
+	            String isAStudent = scanner.next();
+	            String updateQuery = "UPDATE Customer SET Name='" + name + "', Address='" + address + "', Student='" + isAStudent + "' WHERE CustomerNo=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("Booking")) {
+	        	System.out.print("Enter the BookingID of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated start date (yyyy-MM-dd): ");
+	            String dateFrom = scanner.next();
+	            System.out.print("\nEnter updated end date (yyyy-MM-dd): ");
+	            String dateTo = scanner.next();
+	            String updateQuery = "UPDATE Booking SET dateFrom='" + dateFrom + "', dateTo='" + dateTo + "' WHERE BookingID=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("Amenity")) {
+	        	System.out.print("Enter the Amenity ID of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated price: ");
+	            double price = scanner.nextDouble();
+	            String updateQuery = "UPDATE Amenity SET Price=" + price + " WHERE AmenityID=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("RoomDetails")) {
+	        	System.out.print("Enter the RoomNo of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated price: ");
+	            double price = scanner.nextDouble();
+	            String updateQuery = "UPDATE Room SET Price=" + price + " WHERE RoomNo=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("Payment")) {
+	        	System.out.print("Enter the CustomerNo of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated mode of payment (CC, Cash, DD, or Cheque): ");
+	            String mode = scanner.next();
+	            System.out.print("\nEnter updated card number: ");
+	            int cardNo = scanner.nextInt();
+	            System.out.print("\nEnter updated discount: ");
+	            double discount = scanner.nextDouble();
+	            String updateQuery = "UPDATE Payment SET Mode='" + mode + "', CardNo=" + cardNo + ", Discount=" + discount + " WHERE CustomerNo=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("Employee")) {
+	        	System.out.print("Enter the Employee ID of the record you want to update: ");
+		        int id = scanner.nextInt();
+	            System.out.print("\nEnter updated employee name: ");
+	            String employeeName = scanner.next();
+	            System.out.print("\nEnter updated date of birth (yyyy-MM-dd): ");
+	            String dob = scanner.next();
+	            String updateQuery = "UPDATE Employee SET EmpName='" + employeeName + "', DOB='" + dob + "' WHERE EmployeeID=" + id;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+	        else if (recordType.equals("Responsibility")) {
+	        	System.out.print("Enter the Employee ID of the record you want to update: ");
+		        int id = scanner.nextInt();
+		        System.out.print("\nEnter the Responsibility ID of the record you want to update: ");
+		        int respId = scanner.nextInt();
+	            System.out.print("\nEnter updated day (0 for Sunday, 1 for Monday, etc.): ");
+	            int day = scanner.nextInt();
+	            System.out.print("\nEnter updated start time (HH:MM): ");
+	            String startTime = scanner.next();
+	            System.out.print("\nEnter updated stop time (HH:MM): ");
+	            String stopTime = scanner.next();
+	            String updateQuery = "UPDATE Responsibility SET Day=" + day + ", startTime='" + startTime + "', stopTime='" + stopTime + "' WHERE EmployeeID=" + id+" and respID="+respId;
+	            stmt.executeUpdate(updateQuery);
+	        } 
+         else if (recordType.equals("Club460")) {
+        	 System.out.print("Enter the CustomerNo of the record you want to update: ");
+		      int id = scanner.nextInt();
+            System.out.print("\nEnter updated points: ");
+            int points = scanner.nextInt();
+            String updateQuery = "UPDATE Club460 SET Points=" + points + " WHERE CustomerNo=" + id;
+            stmt.executeUpdate(updateQuery);
+        } else if (recordType.equals("\nUsedAmenity")) {
+        	System.out.print("Enter the BookingId of the record you want to update: ");
+		      int id = scanner.nextInt();
+            System.out.print("\nEnter updated quantity: ");
+            int quantity = scanner.nextInt();
+            String updateQuery = "UPDATE UsedAmenity SET Quantity=" + quantity + " WHERE BookingID=" + id;
+            stmt.executeUpdate(updateQuery);
+        } else {
+            System.out.println("\nInvalid record type.");
+            return;
+        }
+        System.out.println("Record updated successfully.");
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+	public static void printAvgRatingsInRange(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
+	    try {
+	        System.out.print("Enter start date (yyyy-MM-dd): ");
+	        String startDate = scanner.next();
+	        System.out.print("Enter end date (yyyy-MM-dd): ");
+	        String endDate = scanner.next();
+	        String query = "SELECT AmenityID, AVG(Rating) AS AvgRating FROM Rating WHERE RatingDate BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY AmenityID ORDER BY AvgRating DESC";
+	        answer = stmt.executeQuery(query);
+	        System.out.println("Amenity ID\tAverage Rating");
+	        while (answer.next()) {
+	            int amenityID = answer.getInt("AmenityID");
+	            double avgRating = answer.getDouble("AvgRating");
+	            System.out.println(amenityID + "\t\t" + avgRating);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	
 	
 	public static void finalBill(Connection dbconn, Statement stmt, ResultSet answer) {
 		Boolean isMember = false;
