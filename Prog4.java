@@ -111,7 +111,7 @@ public class Prog4 {
 			
 			
 		}
-		if (recordType.equals("Booking")) {
+		else if (recordType.equals("Booking")) {
 			try {
 			System.out.print("Enter CustomerNo.:");
 			int customerNo = scanner.nextInt();
@@ -134,7 +134,7 @@ public class Prog4 {
 			
 		}
 		
-		if (recordType.equals("Amenity")) {
+		else if (recordType.equals("Amenity")) {
 			try {
 			System.out.print("Enter AmenityID:");
 			int amenityId = scanner.nextInt();
@@ -149,7 +149,7 @@ public class Prog4 {
 			
 		}
 		
-		if (recordType.equals("RoomDetails")) {
+		else if (recordType.equals("RoomDetails")) {
 			try {
 				System.out.print("Enter RoomID:");
 				int roomId = scanner.nextInt();
@@ -162,7 +162,129 @@ public class Prog4 {
 				e.printStackTrace();
 			}
 		}
+		else if (recordType.equals("Employee")) {
+	        try {
+	            System.out.print("Enter Employee ID: ");
+	            int employeeID = scanner.nextInt();
+	            System.out.print("Enter Employee Name: ");
+	            String employeeName = scanner.next();
+	            System.out.print("Enter Employee Date of Birth (yyyy-MM-dd): ");
+	            String dob = scanner.next();
+	            String insertQuery = "INSERT INTO Employee (EmployeeID, EmpName, DOB) VALUES (" + employeeID + ",'" + employeeName + "','" + dob + "')";
+	            stmt.executeUpdate(insertQuery);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    } else if (recordType.equals("Responsibility")) {
+	        try {
+	            System.out.print("Enter Employee ID: ");
+	            int employeeID = scanner.nextInt();
+	            System.out.print("Enter Responsibility ID: ");
+	            int responsibilityID = scanner.nextInt();
+	            System.out.print("Enter Day (0 for Sunday, 1 for Monday, etc.): ");
+	            int day = scanner.nextInt();
+	            System.out.print("Enter Start Time (HH:MM): ");
+	            String startTime = scanner.next();
+	            System.out.print("Enter Stop Time (HH:MM): ");
+	            String stopTime = scanner.next();
+	            String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, Day, startTime, stopTime) VALUES (" + employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
+	            stmt.executeUpdate(insertQuery);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    } else if (recordType.equals("Club460")) {
+	        try {
+	            System.out.print("Enter CustomerNo.:");
+	            int customerNo = scanner.nextInt();
+	            System.out.print("\nEnter Points:");
+	            int points = scanner.nextInt();
+	            String insertQuery = "INSERT INTO Club460 (CustomerNo, Points) VALUES (" + customerNo + "," + points + ")";
+	            stmt.executeUpdate(insertQuery);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 		
+	}
+	
+	public static void deleteRecord(Connection dbconn, Statement stmt, ResultSet answer, String recordType, Scanner scanner) {
+	    if (recordType.equals("Customer")) {
+	        try {
+	            System.out.print("Enter CustomerNo.: ");
+	            int customerNo = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Customer WHERE CustomerNo = " + customerNo;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println("Deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    else if (recordType.equals("Booking")) {
+	        try {
+	            System.out.print("Enter BookingID: ");
+	            int bookingId = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Booking WHERE BookingID = " + bookingId;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println("Deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    else if (recordType.equals("Amenity")) {
+	        try {
+	            System.out.print("Enter AmenityID: ");
+	            int amenityId = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Amenity WHERE AmenityID = " + amenityId;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println("Deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    else if (recordType.equals("RoomDetails")) {
+	        try {
+	            System.out.print("Enter RoomID: ");
+	            int roomId = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Room WHERE RoomID = " + roomId;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println("Deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    else if (recordType.equals("Employee")) {
+	        try {
+	            System.out.print("Enter Employee ID: ");
+	            int employeeID = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Employee WHERE EmployeeID = " + employeeID;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    } else if (recordType.equals("Responsibility")) {
+	        try {
+	            System.out.print("Enter Employee ID: ");
+	            int employeeID = scanner.nextInt();
+	            System.out.print("Enter Responsibility ID: ");
+	            int responsibilityID = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Responsibility WHERE EmployeeID = " + employeeID + " AND RespID = " + responsibilityID;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    } else if (recordType.equals("Club460")) {
+	        try {
+	            System.out.print("Enter CustomerNo.:");
+	            int customerNo = scanner.nextInt();
+	            String deleteQuery = "DELETE FROM Club460 WHERE CustomerNo = " + customerNo;
+	            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+	            System.out.println(rowsDeleted + " row(s) deleted successfully.");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 	
 	
