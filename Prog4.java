@@ -603,6 +603,10 @@ public class Prog4 {
 					System.out.println("Error adding record : Invalid End Time");
 					return;
 				}
+				if (stopTime.compareTo(startTime) < 0) {
+					System.out.println("Error updating record: Shift end time must be after start time");
+					return;
+				}
 				// Add to responsibility table
 				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, Day, startTime, stopTime) VALUES ("
 						+ employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
@@ -1080,6 +1084,10 @@ public class Prog4 {
 				String stopTime = scanner.nextLine();
 				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
 					System.out.println("Error updating record : Invalid End Time");
+					return;
+				}
+				if (stopTime.compareTo(startTime) < 0) {
+					System.out.println("Error updating record: Shift end time must be after start time");
 					return;
 				}
 				String updateQuery = "UPDATE Responsibility SET Day=" + day + ", startTime='" + startTime
