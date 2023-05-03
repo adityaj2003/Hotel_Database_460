@@ -371,7 +371,6 @@ public class Prog4 {
 			}
 
 			catch (Exception e) {
-				;
 				System.out.println("Error adding record");
 			}
 
@@ -1469,14 +1468,14 @@ public class Prog4 {
 			}
 
 			// Calculate the cost of rooms
-			Integer costRooms = 0;
+			Double costRooms = 0.0;
 			Integer costAmenities = 0;
 			query = "SELECT SUM(Room.Price * (Booking.dateTo - Booking.dateFrom)) AS TotalRoomCost\n"
 					+ "FROM Booking, Room\n" + "WHERE Booking.CustomerNo = " + customerNo + "\n"
 					+ "  AND Booking.RoomNo = Room.RoomNo";
 			answer = stmt.executeQuery(query);
 			if (answer.next()) {
-				costRooms = answer.getInt("TotalRoomCost");
+				costRooms = answer.getDouble("TotalRoomCost");
 			}
 
 			// Calculate the cost of amenities
@@ -1520,11 +1519,11 @@ public class Prog4 {
 
 			String updateQuery = "UPDATE Club460 SET Points = ? WHERE CustomerNo = ?";
 			pstmt = dbconn.prepareStatement(updateQuery);
-			pstmt.setInt(1, (((costAmenities + costRooms) * (100 - discount)) / 100));
+			pstmt.setDouble(1, (((costAmenities + costRooms) * (100 - discount)) / 100));
 			pstmt.setInt(2, customerNo);
 			pstmt.executeUpdate();
 			if (isMember == true) {
-				System.out.println((((costAmenities + costRooms) * (100 - discount)) / 100) / 10
+				System.out.println((((costAmenities + costRooms) * (100 - discount)) / 100)
 						+ " points added to Club460 membership");
 			}
 			// Add a rating for the stay
