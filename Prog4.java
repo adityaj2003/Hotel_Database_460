@@ -218,7 +218,7 @@ public class Prog4 {
 		System.out.println("2. Customers that are currently staying at the hotel.");
 		System.out.println("3. Print the schedule of staff.");
 		System.out.println("4. Print the average ratings of different amenities");
-		System.out.println("5. Query of choice");
+		System.out.println("5. ");
 		int userSelection = scanner.nextInt();
 		scanner.nextLine();
 		if (userSelection == 1) {
@@ -230,7 +230,7 @@ public class Prog4 {
 		} else if (userSelection == 4) {
 			printAvgRatingsInRange(dbconn, stmt, answer, scanner);
 		} else if (userSelection == 5) {
-
+			printEmployeesByRespID(dbconn,stmt, scanner,answer);
 		} else {
 
 		}
@@ -266,7 +266,7 @@ public class Prog4 {
 			}
 
 			catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 
@@ -318,7 +318,7 @@ public class Prog4 {
 						+ "," + amenityId + "," + quantity + ")";
 				stmt.executeUpdate(insertQuery);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Error adding used amenity");
 			}
 		} else if (recordType.equals("Booking")) {
 			try {
@@ -395,7 +395,7 @@ public class Prog4 {
 						+ "','YYYY-MM-DD'), TO_DATE('" + dateTo + "','YYYY-MM-DD'))";
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 
@@ -410,7 +410,7 @@ public class Prog4 {
 				String insertQuery = "INSERT INTO Amenity VALUES (" + amenityId + "," + price + ")";
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 
@@ -425,7 +425,7 @@ public class Prog4 {
 				String insertQuery = "INSERT INTO Room VALUES (" + roomId + "," + price + ")";
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 		} else if (recordType.equals("Employee")) {
@@ -443,7 +443,7 @@ public class Prog4 {
 						+ employeeName + "',TO_DATE('" + dob + "','YYYY-MM-DD'))";
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 		} else if (recordType.equals("Responsibility")) {
@@ -463,7 +463,7 @@ public class Prog4 {
 						+ employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 		} else if (recordType.equals("Club460")) {
@@ -477,7 +477,7 @@ public class Prog4 {
 				stmt.executeUpdate(insertQuery);
 				updateClub460InCustomerTable(dbconn, stmt, customerNo, "Y");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error adding record");
 			}
 		}
@@ -490,8 +490,8 @@ public class Prog4 {
 			String insertQuery = "INSERT INTO Club460 (CustomerNo, Points) VALUES (" + customerNo + "," + points + ")";
 			stmt.executeUpdate(insertQuery);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error adding record");
+			;
+			System.out.println("Error adding record to Club 460");
 		}
 	}
 
@@ -501,8 +501,8 @@ public class Prog4 {
 			int rowsDeleted = stmt.executeUpdate(deleteQuery);
 			System.out.println(rowsDeleted + " row(s) deleted successfully.");
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error deleting record");
+			;
+			System.out.println("Error deleting record from Club 460");
 		}
 	}
 
@@ -524,7 +524,6 @@ public class Prog4 {
 
 				System.out.println("Deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("Booking")) {
@@ -536,7 +535,7 @@ public class Prog4 {
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 				System.out.println("Deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("usedAmenity")) {
@@ -558,7 +557,7 @@ public class Prog4 {
 							+ amenityId + ".");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 
@@ -575,7 +574,7 @@ public class Prog4 {
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 				System.out.println("Deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("RoomDetails")) {
@@ -589,7 +588,7 @@ public class Prog4 {
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 				System.out.println("Deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("Employee")) {
@@ -601,7 +600,7 @@ public class Prog4 {
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 				System.out.println(rowsDeleted + " row(s) deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("Responsibility")) {
@@ -618,7 +617,7 @@ public class Prog4 {
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 				System.out.println(rowsDeleted + " row(s) deleted successfully.");
 			} catch (Exception e) {
-				e.printStackTrace();
+				;
 				System.out.println("Error deleting record");
 			}
 		} else if (recordType.equals("Club460")) {
@@ -630,7 +629,7 @@ public class Prog4 {
 				stmt.executeUpdate(deleteQuery);
 				updateClub460InCustomerTable(dbconn, stmt, customerNo, "N");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Error deleting "+recordType);
 			}
 		}
 	}
@@ -673,7 +672,7 @@ public class Prog4 {
 					+ amenityID + "," + quantity + ")";
 			stmt.executeUpdate(insertQuery);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error adding used amenities");
 		}
 	}
 
@@ -820,7 +819,7 @@ public class Prog4 {
 			}
 			System.out.println("Record updated successfully.");
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error updating "+recordType);
 		}
 	}
 
@@ -830,7 +829,7 @@ public class Prog4 {
 			String updateQuery = "UPDATE Customer SET Student='" + setMembership + "' WHERE CustomerNo=" + customerNo;
 			stmt.executeUpdate(updateQuery);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error adding member to Club460");
 		}
 	}
 
@@ -852,8 +851,7 @@ public class Prog4 {
 		try {
 			stmt.executeUpdate(updateQuery);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error updating payment");
 		}
 		if (mode == "CC") {
 			if (cardNumber.containsKey(cardNo % 10000)) {
@@ -893,7 +891,7 @@ public class Prog4 {
 				System.out.println(amenityID + "\t\t" + avgRating);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error printing average ratings");
 		}
 	}
 
@@ -1084,8 +1082,7 @@ public class Prog4 {
 			addRating(dbconn, scanner);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error printing final bill for customer");
 		}
 
 	}
@@ -1114,8 +1111,30 @@ public class Prog4 {
 			stmt.executeUpdate(insertQuery);
 			System.out.println("Rating added successfully.");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error adding rating. ");
+			;
 		}
+	}
+	
+	public static void printEmployeesByRespID(Connection dbconn, Statement stmt, Scanner scanner, ResultSet answer) {
+	    System.out.println("Enter the RespID you want to search employees by: ");
+	    int respID = scanner.nextInt();
+	    scanner.nextLine();
+
+	    String query = "SELECT EmpName FROM Employee e INNER JOIN Responsibility r ON e.EmployeeID = r.EmployeeID WHERE r.RespID = " + respID;
+
+	    try {
+	        stmt = dbconn.createStatement();
+	        answer = stmt.executeQuery(query);
+
+	        System.out.println("Employees with RespID " + respID + ":");
+	        while (answer.next()) {
+	            String employeeName = answer.getString("EmpName");
+	            System.out.println(employeeName);
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Error printing employee names by responsibilites.");
+	    }
 	}
 
 }
