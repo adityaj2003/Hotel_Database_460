@@ -217,8 +217,8 @@ public class Prog4 {
 				.println("1. Print the current bill (total $) for a customer for their stay and all unpaid amenities.");
 		System.out.println("2. Customers that are currently staying at the hotel.");
 		System.out.println("3. Print the schedule of staff.");
-		System.out.println("4. Print the average ratings of different amenities");
-		System.out.println("5. ");
+		System.out.println("4. Print the average ratings of different amenities.");
+		System.out.println("5. Print the employee names of specific responsibility IDs.");
 		int userSelection = scanner.nextInt();
 		scanner.nextLine();
 		if (userSelection == 1) {
