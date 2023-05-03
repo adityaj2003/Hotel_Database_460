@@ -1,3 +1,33 @@
+/**
+ * This Program is a hotel database management system for Motel460. This program is designed to manage the operations 
+ * of Motel460 by providing a database and an associated manipulation/querying application.
+ * The program allows customers to book a room for any available dates, add customers to hotel records
+ * Customers are given different categories based on what or how they are booking.
+ *  College students get discounts on bookings and services provided.
+ * If the customer is signed up as a subscribed member of “Club 460,” they will get a variety of perks including
+ * discounts, free use of amenities. Certain credit cards are given disount and customer's points can be used 
+ * for discount as well. The program also keeps track of employees and their responsibilities/schedule. 
+ * The program provides the following functionalities:
+ * Record insertion: Supports inserting a new data record via a JDBC interface.
+ * Record deletion: Supports deleting an existing data record via a JDBC interface.
+ * Record update: Supports updating an existing data record via a JDBC interface.
+ * Queries: Supports querying the database via a JDBC interface for the problem description given above. Implements
+ * the four provided queries as well as at least one query of our own design.
+ * The program provides a command line interface to interact with the dbms and perform the various tasks and functionalities. 
+ * 
+ * Author: Aditya Jadhav and Aditya Kumar
+ * Instructor Name : Lester McCann
+ * TA names : Ayush Pinto and Tanner Finken
+ *  * Class : CSc 460 - Database design
+ * 
+ * Due Date: May 1, 2023
+ * 
+ * Operational requirements -- Written in Java, requires Java SDK 17 to run. The username and password are hardcoded. Also you have to give the classpath in lectura before running. 
+ * 								The tables are already created for the hardcoded user
+ * Required Features and Bugs- I believe that i have included everything and do not know of any bugs in the program
+*/
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
