@@ -843,6 +843,7 @@ public class Prog4 {
 		int cardNo = scanner.nextInt();
 		scanner.nextLine();
 		int discount = 0;
+		System.out.println("Card last 4 digits: "+cardNo%10000);
 		if (cardNumber.containsKey(cardNo % 10000)) {
 			discount = cardDiscount.get(cardNumber.get(cardNo % 10000));
 		}
@@ -1035,7 +1036,6 @@ public class Prog4 {
 				discountString += "Card Discount";
 			}
 
-			System.out.println("Discount Applied: " + discount);
 			String customerName = "";
 
 			query = "SELECT * FROM Customer WHERE CustomerNo = " + customerNo;
@@ -1074,10 +1074,11 @@ public class Prog4 {
 			if (discountString.equals("")) {
 				discountString = "NA";
 			}
-
+			System.out.println("Discount Int: "+discount);
+			System.out.println("costRooms: "+costRooms);
 			System.out.println("CustomerName\t Total Cost\t Discounts Applied");
 			System.out.println(
-					customerName + "\t" + (costAmenities + costRooms) * (1 - (discount / 100)) + "\t" + discountString);
+					customerName + "\t" + ((costAmenities + costRooms) * (100-discount))/100 + "\t" + discountString);
 
 			addRating(dbconn, scanner);
 
@@ -1128,9 +1129,11 @@ public class Prog4 {
 	        answer = stmt.executeQuery(query);
 
 	        System.out.println("Employees with RespID " + respID + ":");
+	        int i =1;
 	        while (answer.next()) {
 	            String employeeName = answer.getString("EmpName");
-	            System.out.println(employeeName);
+	            System.out.println(i+". "+employeeName);
+	            i+=1;
 	        }
 	    } catch (SQLException e) {
 	        System.out.println("Error printing employee names by responsibilites.");
