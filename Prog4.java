@@ -483,6 +483,9 @@ public class Prog4 {
 				String dateTo = scanner.nextLine();
 				// Parse and format the dateTo input
 				dateTo = dateFormat1.format(dateFormat1.parse(dateTo));
+				if (dateTo.compareTo(dateFrom) < 0) {
+					System.out.println("DateFrom must be before DateTo");
+				}
 				// Checks if there is no overlap between booking of a particular room
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
 						+ " AND BookingID != " + bookingId + " AND (dateFrom BETWEEN TO_DATE('" + dateFrom
@@ -590,8 +593,16 @@ public class Prog4 {
 				System.out.println("Enter Start Time (HH:MM): ");
 				// Ask the user for various information to add to the record.
 				String startTime = scanner.nextLine();
+				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
+					System.out.println("Invalid Time");
+					return;
+				}
 				System.out.println("Enter Stop Time (HH:MM): ");
 				String stopTime = scanner.nextLine();
+				if (stopTime.charAt(0) == '2' &&  stopTime.charAt(1) > '4') {
+					System.out.println("Invalid Time");
+					return;
+				}
 				// Add to responsibility table
 				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, Day, startTime, stopTime) VALUES ("
 						+ employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
@@ -978,6 +989,9 @@ public class Prog4 {
 				// Parse and format the dateTo input
 
 				dateTo = dateFormat.format(dateFormat.parse(dateTo));
+				if (dateTo.compareTo(dateFrom) < 0) {
+					System.out.println("DateFrom must be before DateTo");
+				}
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
 						+ " AND BookingID != " + id + " AND (dateFrom BETWEEN TO_DATE('" + dateFrom
 						+ "','YYYY-MM-DD') AND TO_DATE('" + dateTo + "','YYYY-MM-DD') OR dateTo BETWEEN TO_DATE('"
@@ -1057,9 +1071,17 @@ public class Prog4 {
 				System.out.println("\nEnter updated start time (HH:MM): ");
 				// Ask the user for various information to delete the record.
 				String startTime = scanner.nextLine();
+				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
+					System.out.println("Invalid Time");
+					return;
+				}
 				System.out.println("Enter updated stop time (HH:MM): ");
 				// Ask the user for various information to delete the record.
 				String stopTime = scanner.nextLine();
+				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
+					System.out.println("Invalid Time");
+					return;
+				}
 				String updateQuery = "UPDATE Responsibility SET Day=" + day + ", startTime='" + startTime
 						+ "', stopTime='" + stopTime + "' WHERE EmployeeID=" + id + " and respID=" + respId;
 				stmt.executeUpdate(updateQuery);
@@ -1108,7 +1130,7 @@ public class Prog4 {
 			String setMembership) {
 		try {
 			// Update the Club 460 membership status in the Customer table
-			String updateQuery = "UPDATE Customer SET Student='" + setMembership + "' WHERE CustomerNo=" + customerNo;
+			String updateQuery = "UPDATE Customer SET Club460='" + setMembership + "' WHERE CustomerNo=" + customerNo;
 			stmt.executeUpdate(updateQuery);
 		} catch (SQLException e) {
 			System.out.println("Error adding member to Club460");
