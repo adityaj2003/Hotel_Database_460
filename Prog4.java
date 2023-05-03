@@ -1426,11 +1426,12 @@ public class Prog4 {
 	        } else {
 	        	
 	        }
-
+	        //Asks the user if they wanna use points
 	        System.out.println("Do you wanna use points? (Y/N)");
 	        String usePointsFlag = scanner.nextLine();
 	        if (usePointsFlag.equals("Y")) {
-	        	costRooms -= points/10;
+	        	//If yes then subtract the points conversion from roomCost
+	        	costRooms =  costRooms - points/10;
 	        	discountString += ", "+points+" points used";
 	        }
 	        // Set the discount string to "NA" if no discounts were applied
@@ -1472,6 +1473,7 @@ public class Prog4 {
 	 */
 	public static void addRating(Connection dbconn, Scanner scanner) {
 		System.out.println();
+		//Continuosly keep asking for if they wanna add a rating. 
 		System.out.println("Do you wanna add rating for an Amenity? (Y/N)");
 	    String ratingFlag = scanner.nextLine();
 	    if (ratingFlag.equals("Y")) {
