@@ -1418,7 +1418,21 @@ public class Prog4 {
 	        if (isMember == true) {
 	            costAmenities = 0;
 	        }
+	        query = "SELECT Points FROM Club460 WHERE CustomerNo = " + customerNo;
+	        answer = stmt.executeQuery(query);
+	        int points = 0;
+	        if (answer.next()) {
+	            points = answer.getInt("Points");
+	        } else {
+	        	
+	        }
 
+	        System.out.println("Do you wanna use points? (Y/N)");
+	        String usePointsFlag = scanner.nextLine();
+	        if (usePointsFlag.equals("Y")) {
+	        	costRooms -= points/10;
+	        	discountString += ", "+points+" points used";
+	        }
 	        // Set the discount string to "NA" if no discounts were applied
 	        if (discountString.equals("")) {
 	            discountString = "NA";
@@ -1431,8 +1445,17 @@ public class Prog4 {
 	        System.out.println(
 	                customerName + "\t" + ((costAmenities + costRooms) * (100 - discount)) / 100 + "\t" + discountString);
 
+	        String updateQuery = "UPDATE Club460 SET Points = ? WHERE CustomerNo = ?";
+	        pstmt = dbconn.prepareStatement(updateQuery);
+	        pstmt.setInt(1,(((costAmenities + costRooms) * (100 - discount)) / 100));
+	        pstmt.setInt(2, customerNo);
+	        pstmt.executeUpdate();
+	       if (isMember == true) {
+	    	   System.out.println((((costAmenities + costRooms) * (100 - discount)) / 100)/10+" points added to Club460 membership");
+	       }
 	        // Add a rating for the stay
-	        addRating(dbconn, scanner);
+	       
+	       addRating(dbconn, scanner);
 
 		} catch (SQLException e) {
 			System.out.println("Error printing final bill for customer");
@@ -1448,6 +1471,15 @@ public class Prog4 {
 	 * @param scanner the Scanner object used to read user input
 	 */
 	public static void addRating(Connection dbconn, Scanner scanner) {
+		System.out.println();
+		System.out.println("Do you wanna add rating for an Amenity? (Y/N)");
+	    String ratingFlag = scanner.nextLine();
+	    if (ratingFlag.equals("Y")) {
+	    	
+	    }
+	    else {
+	    	return;
+	    }
 	    // Prompt the user for the AmenityID to rate
 	    System.out.println("Enter the AmenityID you want to rate: ");
 	    int amenityID = scanner.nextInt();
@@ -1476,6 +1508,7 @@ public class Prog4 {
 	        Statement stmt = dbconn.createStatement();
 	        stmt.executeUpdate(insertQuery);
 	        System.out.println("Rating added successfully.");
+	        addRating(dbconn, scanner);
 	    } catch (SQLException e) {
 	        System.out.println("Error adding rating.");
 	    }
