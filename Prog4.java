@@ -484,7 +484,7 @@ public class Prog4 {
 				// Parse and format the dateTo input
 				dateTo = dateFormat1.format(dateFormat1.parse(dateTo));
 				if (dateTo.compareTo(dateFrom) < 0) {
-					System.out.println("DateFrom must be before DateTo");
+					System.out.println("Error adding booking : DateFrom must be before DateTo");
 				}
 				// Checks if there is no overlap between booking of a particular room
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
@@ -594,13 +594,13 @@ public class Prog4 {
 				// Ask the user for various information to add to the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
-					System.out.println("Invalid Time");
+					System.out.println("Error adding record : Invalid Start Time");
 					return;
 				}
 				System.out.println("Enter Stop Time (HH:MM): ");
 				String stopTime = scanner.nextLine();
 				if (stopTime.charAt(0) == '2' &&  stopTime.charAt(1) > '4') {
-					System.out.println("Invalid Time");
+					System.out.println("Error adding record : Invalid End Time");
 					return;
 				}
 				// Add to responsibility table
@@ -990,7 +990,7 @@ public class Prog4 {
 
 				dateTo = dateFormat.format(dateFormat.parse(dateTo));
 				if (dateTo.compareTo(dateFrom) < 0) {
-					System.out.println("DateFrom must be before DateTo");
+					System.out.println("Error updating booking : DateFrom must be before DateTo");
 				}
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
 						+ " AND BookingID != " + id + " AND (dateFrom BETWEEN TO_DATE('" + dateFrom
@@ -1072,14 +1072,14 @@ public class Prog4 {
 				// Ask the user for various information to delete the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
-					System.out.println("Invalid Time");
+					System.out.println("Error updating record : Invalid Start Time");
 					return;
 				}
 				System.out.println("Enter updated stop time (HH:MM): ");
 				// Ask the user for various information to delete the record.
 				String stopTime = scanner.nextLine();
 				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
-					System.out.println("Invalid Time");
+					System.out.println("Error updating record : Invalid End Time");
 					return;
 				}
 				String updateQuery = "UPDATE Responsibility SET Day=" + day + ", startTime='" + startTime
