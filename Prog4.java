@@ -1515,11 +1515,8 @@ public class Prog4 {
 			}
 
 			// Print the final bill
-			System.out.println("Discount Int: " + discount);
-			System.out.println("costRooms: " + costRooms);
-			System.out.println("CustomerName\t Total Cost\t Discounts Applied");
-			System.out.println(customerName + "\t" + ((costAmenities + costRooms) * (100 - discount)) / 100 + "\t"
-					+ discountString);
+			System.out.println("Discounts Applied: " + discountString);
+			System.out.println("Total Cost: " + ((costAmenities + costRooms) * (100 - discount)) / 100);
 
 			String updateQuery = "UPDATE Club460 SET Points = ? WHERE CustomerNo = ?";
 			pstmt = dbconn.prepareStatement(updateQuery);
