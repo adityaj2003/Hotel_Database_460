@@ -1288,7 +1288,7 @@ public class Prog4 {
 
 			// Construct the query to calculate average ratings for amenities in the given
 			// date range
-			String query = "SELECT AmenityID, AVG(Rating) AS AvgRating, AmenityName FROM Rating JOIN Amenity "
+			String query = "SELECT Rating.AmenityID, AVG(Rating) AS AvgRating FROM Rating JOIN Amenity "
 					+ "ON Rating.AmenityID = Amenity.AmenityID WHERE RatingDate BETWEEN TO_DATE('" + formattedStartDate
 					+ "', 'yyyy-MM-dd') AND TO_DATE('" + formattedEndDate
 					+ "', 'yyyy-MM-dd') GROUP BY Rating.AmenityID ORDER BY AvgRating DESC";
@@ -1297,12 +1297,11 @@ public class Prog4 {
 			answer = stmt.executeQuery(query);
 
 			// Print the results
-			System.out.print("\nAmenity ID\tName\tAverage Rating");
+			System.out.print("\nAmenity ID\tAverage Rating");
 			while (answer.next()) {
 				int amenityID = answer.getInt("AmenityID");
 				double avgRating = answer.getDouble("AvgRating");
-				String name = answer.getString(3);
-				System.out.println(amenityID + "\t\t" + name + "\t\t" + avgRating);
+				System.out.println(amenityID + "\t\t" + avgRating);
 			}
 		} catch (Exception e) {
 			System.out.print("\nError printing average ratings");
@@ -1554,7 +1553,7 @@ public class Prog4 {
 
 			// Print the final bill
 			System.out.print("\nDiscounts Applied: " + discountString);
-			System.out.print("\nTotal Cost: " + ((costAmenities + costRooms) * (100 - discount)) / 100);
+			System.out.print("\nTotal Cost: " + ((costAmenities + costRooms) * (100 - discount)) / 100+"\n");
 
 			String updateQuery = "UPDATE Club460 SET Points = ? WHERE CustomerNo = ?";
 			pstmt = dbconn.prepareStatement(updateQuery);
