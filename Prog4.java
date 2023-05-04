@@ -1232,7 +1232,7 @@ public class Prog4 {
 
 		// Now we start writing the queries
 
-		String query = "SELECT Employee.EmployeeID, EmpName, startime, stoptime, Day, JobTitle FROM Employee JOIN "
+		String query = "SELECT Employee.EmployeeID, EmpName, starttime, stoptime, Day, JobTitle FROM Employee JOIN "
 				+ "Responsibility ON Employee.EmployeeID = Responsibility.EmployeeID " + "ORDER BY Day";
 		try {
 			answer = stmt.executeQuery(query);
