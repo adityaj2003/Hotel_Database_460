@@ -28,26 +28,19 @@
  * Required Features and Bugs- I believe that i have included everything and do not know of any bugs in the program
 */
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.io.*;
 import java.sql.*;
-import java.util.Date;
 
 public class Prog4 {
 
-	public static Map<String, Integer> cardDiscount = new HashMap<String, Integer>();
-	public static Map<Integer, String> cardNumber = new HashMap<Integer, String>();
+	private static Map<String, Integer> cardDiscount = new HashMap<String, Integer>();
+	private static Map<Integer, String> cardNumber = new HashMap<Integer, String>();
 
 	public static void main(String[] args) {
 		// Stores the discount for the various types of cards
@@ -72,7 +65,7 @@ public class Prog4 {
 
 		} catch (ClassNotFoundException e) {
 
-			System.err.println("*** ClassNotFoundException:  " + "Error loading Oracle JDBC driver.  \n"
+			System.err.print("\n*** ClassNotFoundException:  " + "Error loading Oracle JDBC driver.\n"
 					+ "\tPerhaps the driver is not on the Classpath?");
 			System.exit(-1);
 
@@ -87,10 +80,10 @@ public class Prog4 {
 
 		} catch (SQLException e) {
 
-			System.err.println("*** SQLException:  " + "Could not open JDBC connection.");
-			System.err.println("\tMessage:   " + e.getMessage());
-			System.err.println("\tSQLState:  " + e.getSQLState());
-			System.err.println("\tErrorCode: " + e.getErrorCode());
+			System.err.print("\n*** SQLException:  " + "Could not open JDBC connection.");
+			System.err.print("\n\tMessage:   " + e.getMessage());
+			System.err.print("\n\tSQLState:  " + e.getSQLState());
+			System.err.print("\n\tErrorCode: " + e.getErrorCode());
 			System.exit(-1);
 
 		}
@@ -117,23 +110,24 @@ public class Prog4 {
 	 */
 	public static void mainMenu(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
 		// Takes int input from user to determine what he wants to do
-		System.out.println("What do you wanna do today? (Type a number from (1-5) to specify)\n");
-		System.out.println("1. Add / Remove / Update Customer Details");
-		System.out.println("2. Add / Remove / Update Booking Details");
-		System.out.println("3. Add / Remove / Update Amenities");
-		System.out.println("4. Add / Remove / Update Room Details");
-		System.out.println("5. Add / Remove / Update UsedAmenities of Customer");
-		System.out.println("6. Add / Remove / Update Club460 Members");
-		System.out.println("7. Add / Remove / Update Employee Details");
-		System.out.println("8. Add / Remove / Update Employee Responsibilities");
-		System.out.println("9. Execute Predefined Queries");
+		System.out.print("\n\t\tMENU\nWhat do you wanna do today?");
+		System.out.print("\nType a number from (1-9) to specify, -1 to exit\n");
+		System.out.print("\n1. Add / Remove / Update Customer Details");
+		System.out.print("\n2. Add / Remove / Update Booking Details");
+		System.out.print("\n3. Add / Remove / Update Amenities");
+		System.out.print("\n4. Add / Remove / Update Room Details");
+		System.out.print("\n5. Add / Remove / Update UsedAmenities of Customer");
+		System.out.print("\n6. Add / Remove / Update Club460 Members");
+		System.out.print("\n7. Add / Remove / Update Employee Details");
+		System.out.print("\n8. Add / Remove / Update Employee Responsibilities");
+		System.out.print("\n9. Execute Predefined Queries\n");
 		int input = scanner.nextInt();
 		// Check user input to determine the chosen option and whether he wants to
 		// add/delete/update chose option
 		if (input == 1) {
-			System.out.println("1. Add Customer Details");
-			System.out.println("2. Remove Customer Details");
-			System.out.println("3. Update Customer Details");
+			System.out.print("\n1. Add Customer Details");
+			System.out.print("\n2. Remove Customer Details");
+			System.out.print("\n3. Update Customer Details\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 			if (userSelection == 1) {
@@ -143,15 +137,15 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Customer", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 2) {
-			System.out.println("1. Add Booking Details");
-			System.out.println("2. Remove Booking Details");
-			System.out.println("3. Update Booking Details");
+			System.out.print("\n1. Add Booking Details");
+			System.out.print("\n2. Remove Booking Details");
+			System.out.print("\n3. Update Booking Details\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 			if (userSelection == 1) {
@@ -161,15 +155,15 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Booking", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again! \n");
 			}
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 3) {
-			System.out.println("1. Add Amenities");
-			System.out.println("2. Remove Amenities");
-			System.out.println("3. Update Amenities");
+			System.out.print("\n1. Add Amenities");
+			System.out.print("\n2. Remove Amenities");
+			System.out.print("\n3. Update Amenities\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 			if (userSelection == 1) {
@@ -179,15 +173,15 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Amenity", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 4) {
-			System.out.println("1. Add Room Information");
-			System.out.println("2. Remove Room Information");
-			System.out.println("3. Update Room Information");
+			System.out.print("\n1. Add Room Information");
+			System.out.print("\n2. Remove Room Information");
+			System.out.print("\n3. Update Room Information\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 			if (userSelection == 1) {
@@ -197,15 +191,15 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "RoomDetails", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 5) {
-			System.out.println("1. Add UsedAmenities");
-			System.out.println("2. Remove UsedAmenities");
-			System.out.println("3. Update UsedAmenities");
+			System.out.print("\n1. Add UsedAmenities");
+			System.out.print("\n2. Remove UsedAmenities");
+			System.out.print("\n3. Update UsedAmenities\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 
@@ -216,16 +210,16 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "usedAmenity", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 6) {
-			System.out.println("1. Add Club460 Members");
-			System.out.println("2. Remove Club460 Members");
-			System.out.println("3. Update Club460 Members");
+			System.out.print("\n1. Add Club460 Members");
+			System.out.print("\n2. Remove Club460 Members");
+			System.out.print("\n3. Update Club460 Members\n");
 			// Taking user input to check whether to update/delete or add.
 			int userSelection = scanner.nextInt();
 
@@ -236,16 +230,16 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Club460", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 7) {
-			System.out.println("1. Add Employee Details");
-			System.out.println("2. Remove Employee Details");
-			System.out.println("3. Update Employee Details");
+			System.out.print("\n1. Add Employee Details");
+			System.out.print("\n2. Remove Employee Details");
+			System.out.print("\n3. Update Employee Details\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 
@@ -256,16 +250,16 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Employee", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nInvalid Selection, please try again!");
 			}
 
 			mainMenu(dbconn, stmt, answer, scanner);
 			// Check user input to determine the chosen option and whether he wants to
 			// add/delete/update chose option
 		} else if (input == 8) {
-			System.out.println("1. Add Employee Responsibilities");
-			System.out.println("2. Remove Employee Responsibilities");
-			System.out.println("3. Update Employee Responsibilities");
+			System.out.print("\n1. Add Employee Responsibilities");
+			System.out.print("\n2. Remove Employee Responsibilities");
+			System.out.print("\n3. Update Employee Responsibilities\n");
 			int userSelection = scanner.nextInt();
 			// Taking user input to check whether to update/delete or add.
 			if (userSelection == 1) {
@@ -275,7 +269,7 @@ public class Prog4 {
 			} else if (userSelection == 3) {
 				updateRecord(dbconn, stmt, answer, "Responsibility", scanner);
 			} else {
-				System.out.println("Invalid Selection");
+				System.out.print("\nINVALID SELECTION, please try again!\n");
 			}
 
 			mainMenu(dbconn, stmt, answer, scanner);
@@ -283,6 +277,8 @@ public class Prog4 {
 			// add/delete/update chose option
 		} else if (input == 9) {
 			predefinedQueriesMenu(dbconn, stmt, answer, scanner);
+		} else if (input == -1) {
+			System.exit(0);
 		}
 
 	}
@@ -297,15 +293,19 @@ public class Prog4 {
 	 * @param answer  the ResultSet object containing the results of executed
 	 *                queries
 	 * @param scanner the Scanner object used to read user input
+	 * 
+	 *                Pre-condition: All the arguments are functioning
+	 *                Post-condition: The user has made a choice, and was given the
+	 *                desired results
 	 */
 	public static void predefinedQueriesMenu(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
 		// Gives a selection of predefined queries user can run.
 		System.out
-				.println("1. Print the current bill (total $) for a customer for their stay and all unpaid amenities.");
-		System.out.println("2. Customers that are currently staying at the hotel.");
-		System.out.println("3. Print the schedule of staff.");
-		System.out.println("4. Print the average ratings of different amenities.");
-		System.out.println("5. Print the employee names of specific responsibility IDs.");
+				.print("\n1. Print the current bill (total $) for a customer for their stay and all unpaid amenities.");
+		System.out.print("\n2. Customers that are currently staying at the hotel.");
+		System.out.print("\n3. Print the schedule of staff.");
+		System.out.print("\n4. Print the average ratings of different amenities.");
+		System.out.print("\n5. Print the employee names of specific responsibility/job titles.\n");
 		int userSelection = scanner.nextInt();
 		scanner.nextLine();
 		// Takes user input from the user to decide what predefined queries they wanna
@@ -321,7 +321,7 @@ public class Prog4 {
 		} else if (userSelection == 5) {
 			printEmployeesByRespID(dbconn, stmt, scanner, answer);
 		} else {
-			System.out.println("Invalid Selection");
+			System.out.print("\nINVALID SELECTION, please try again!\n");
 		}
 
 		// Return to the main menu after executing the selected query
@@ -347,18 +347,18 @@ public class Prog4 {
 		if (recordType.equals("Customer")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter CustomerNo.: ");
+				System.out.print("Enter CustomerNo.: ");
 				int customerNo = scanner.nextInt();
 				scanner.nextLine();
-				System.out.println("Name: ");
+				System.out.print("\nName: ");
 				// Ask the user for various information to add to the record.
 				String name = scanner.nextLine();
-				System.out.println("Address: ");
+				System.out.print("\nAddress: ");
 				String address = scanner.nextLine();
 				// Ask the user for various information to add to the record.
-				System.out.println("Is customer a student? (Y/N): ");
+				System.out.print("\nIs customer a student? (Y/N): ");
 				String isAStudent = scanner.nextLine();
-				System.out.println("Is customer a Club460 Member? (Y/N): ");
+				System.out.print("\n\nIs customer a Club460 Member? (Y/N): ");
 				String isAMember = scanner.nextLine();
 				// Query to insert to table
 				String insertQuery = "INSERT INTO Customer (CustomerNo, Name, Address, Student, Club460) VALUES ("
@@ -371,13 +371,13 @@ public class Prog4 {
 			}
 
 			catch (Exception e) {
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 
 		} else if (recordType.equals("usedAmenity")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter BookingID: ");
+				System.out.print("Enter BookingID: ");
 				int bookingId = scanner.nextInt();
 				boolean bookingExists = false;
 				// Check if the booking inputted by user exists.
@@ -392,11 +392,11 @@ public class Prog4 {
 				}
 				// If booking doesn't exist, print and return to main menu.
 				if (!bookingExists) {
-					System.out.println("BookingID " + bookingId + " does not exist in the Booking table.");
+					System.out.print("\nBookingID " + bookingId + " does not exist in the Booking table.");
 					return;
 				}
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter AmenityID: ");
+				System.out.print("\nEnter AmenityID: ");
 				int amenityId = scanner.nextInt();
 				boolean amenityExists = false;
 				// Check if amenity inputted exists
@@ -411,27 +411,27 @@ public class Prog4 {
 				}
 				// If amenity doesn't exist, print and return to main menu.
 				if (!amenityExists) {
-					System.out.println("AmenityID " + amenityId + " does not exist in the Amenity table.");
+					System.out.print("\nAmenityID " + amenityId + " does not exist in the Amenity table.");
 					addRecord(dbconn, stmt, answer, "Amenity", scanner);
 					return;
 				}
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter Quantity: ");
+				System.out.print("\nEnter Quantity: ");
 				int quantity = scanner.nextInt();
 				// Insert to table
 				String insertQuery = "INSERT INTO UsedAmenity (BookingID, AmenityID, Quantity) VALUES (" + bookingId
 						+ "," + amenityId + "," + quantity + ")";
 				stmt.executeUpdate(insertQuery);
 			} catch (SQLException e) {
-				System.out.println("Error adding used amenity");
+				System.out.print("\nError adding the Amenity used by the booking." + "Maybe it was added before?");
 			}
 		} else if (recordType.equals("Booking")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter CustomerNo.: ");
+				System.out.print("\nEnter CustomerNo.: ");
 				int customerNo = scanner.nextInt();
 				boolean customerExists = false;
-				// Check if customer exists of the customerNo inputted
+				// Check if customer exists of the customerNo inputed
 				String checkCustomerNoQuery = "SELECT COUNT(*) FROM Customer WHERE CustomerNo = " + customerNo;
 				ResultSet resultSet = stmt.executeQuery(checkCustomerNoQuery);
 				// If customer exists, change flag to true
@@ -443,15 +443,15 @@ public class Prog4 {
 				}
 				// If the user doesn't exist, print and return to main menu.
 				if (!customerExists) {
-					System.out.println("CustomerNo " + customerNo + " does not exist in the Customer table.");
+					System.out.print("\nCustomerNo " + customerNo + " does not exist in the Customer table.");
 					addRecord(dbconn, stmt, answer, "Customer", scanner);
 					return;
 				}
 				// Ask the user for various information to add to the record.
-				System.out.println("RoomNo: ");
+				System.out.print("\nRoomNo: ");
 				int roomNo = scanner.nextInt();
 				boolean roomExists = false;
-				// Check if room inputted exists.
+				// Check if room inputed exists.
 				String checkRoomNoQuery = "SELECT COUNT(*) FROM Room WHERE RoomNo = " + roomNo;
 				resultSet = stmt.executeQuery(checkRoomNoQuery);
 
@@ -464,27 +464,27 @@ public class Prog4 {
 				// If room doesn't exist, print and return to main menu.
 
 				if (!roomExists) {
-					System.out.println("RoomNo " + roomNo + " does not exist in the Room table.");
+					System.out.print("\nRoomNo " + roomNo + " does not exist in the Room table.");
 					addRecord(dbconn, stmt, answer, "RoomDetails", scanner);
 					return;
 				}
 				// Ask the user for various information to add to the record.
-				System.out.println("BookingId: ");
+				System.out.print("\nBookingId: ");
 				int bookingId = scanner.nextInt();
 				scanner.nextLine();
 				SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
 				// Ask the user for various information to add to the record.
-				System.out.println("Start Date (yyyy-MM-dd): ");
+				System.out.print("\nStart Date (yyyy-MM-dd): ");
 				String dateFrom = scanner.nextLine();
 				// Parse and format the dateFrom input
 				dateFrom = dateFormat1.format(dateFormat1.parse(dateFrom));
 				// Ask the user for various information to add to the record.
-				System.out.println("End Date (yyyy-MM-dd): ");
+				System.out.print("\nEnd Date (yyyy-MM-dd): ");
 				String dateTo = scanner.nextLine();
 				// Parse and format the dateTo input
 				dateTo = dateFormat1.format(dateFormat1.parse(dateTo));
 				if (dateTo.compareTo(dateFrom) < 0) {
-					System.out.println("Error adding booking : DateFrom must be before DateTo");
+					System.out.print("\nError adding booking : DateFrom must be before DateTo");
 				}
 				// Checks if there is no overlap between booking of a particular room
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
@@ -499,11 +499,11 @@ public class Prog4 {
 				if (resultSet.next()) {
 					bookedCount = resultSet.getInt(1);
 				}
-				// If there is a booking for the dates inputted or inbetween them, then print
-				// that cannot book and reutnr to main menu.
+				// If there is a booking for the dates inputed or in-between them, then print
+				// that cannot book and return to main menu.
 				if (bookedCount > 0) {
-					System.out.println(
-							"RoomNo " + roomNo + " is already booked between " + dateFrom + " and " + dateTo + ".");
+					System.out.print(
+							"\nRoomNo " + roomNo + " is already booked between " + dateFrom + " and " + dateTo + ".");
 					return;
 				}
 				// Insert to table
@@ -513,8 +513,7 @@ public class Prog4 {
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				;
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 
 		}
@@ -522,28 +521,32 @@ public class Prog4 {
 		else if (recordType.equals("Amenity")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter AmenityID: ");
+				System.out.print("\nEnter AmenityID: ");
 				int amenityId = scanner.nextInt();
-				System.out.println("Enter price of amenity: ");
+				scanner.nextLine();
+				System.out.print("\nEnter amenity's name: ");
+				String amenityname = scanner.nextLine();
+				System.out.print("\nEnter price of amenity: ");
 				// Ask the user for various information to add to the record.
 				int price = scanner.nextInt();
 				// Insert to the Amenity table
-				String insertQuery = "INSERT INTO Amenity VALUES (" + amenityId + "," + price + ")";
+				String insertQuery = "INSERT INTO Amenity (AmenityID, name, price) VALUES (" + amenityId + ", '" + amenityname + "', " + price + ")";
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				;
-				System.out.println("Error adding record");
+				e.printStackTrace();
+				System.out.print("\nError adding record, maybe amenity id already exists?");
 			}
 
 		}
 
+
 		else if (recordType.equals("RoomDetails")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter RoomID: ");
+				System.out.print("\nEnter RoomID: ");
 				int roomId = scanner.nextInt();
-				System.out.println("Enter price of Room:");
+				System.out.print("\nEnter price of Room:");
 				// Ask the user for various information to add to the record.
 				int price = scanner.nextInt();
 				// Insert to room table
@@ -552,20 +555,20 @@ public class Prog4 {
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
 				;
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 		} else if (recordType.equals("Employee")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter Employee ID: ");
+				System.out.print("\nEnter Employee ID: ");
 				int employeeID = scanner.nextInt();
 				SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
 				scanner.nextLine();
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter Employee Name: ");
+				System.out.print("\nEnter Employee Name: ");
 				String employeeName = scanner.nextLine();
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter Employee Date of Birth (yyyy-MM-dd): ");
+				System.out.print("\nEnter Employee Date of Birth (yyyy-MM-dd): ");
 				String dob = scanner.nextLine();
 				// Parse and format the dob input
 				dob = dateFormat1.format(dateFormat1.parse(dob));
@@ -576,52 +579,55 @@ public class Prog4 {
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
 				;
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 		} else if (recordType.equals("Responsibility")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter Employee ID: ");
+				System.out.print("\nEnter Employee ID: ");
 				int employeeID = scanner.nextInt();
-				System.out.println("Enter Responsibility ID: ");
+				System.out.print("\nEnter Responsibility ID: ");
 				// Ask the user for various information to add to the record.
 				int responsibilityID = scanner.nextInt();
-				System.out.println("Enter Day (0 for Sunday, 1 for Monday, etc.): ");
+				System.out.print("\nEnter the Responsibility title: ");
+				String title = scanner.nextLine();
+				System.out.print("\nEnter Day (0 for Sunday, 1 for Monday, etc.): ");
 				int day = scanner.nextInt();
 				// Ask the user for various information to add to the record.
 				scanner.nextLine();
-				System.out.println("Enter Start Time (HH:MM): ");
+				System.out.print("\nEnter Start Time (HH:MM): ");
 				// Ask the user for various information to add to the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
-					System.out.println("Error adding record : Invalid Start Time");
+					System.out.print("\nError adding record : Invalid Start Time");
 					return;
 				}
-				System.out.println("Enter Stop Time (HH:MM): ");
+				System.out.print("\nEnter Stop Time (HH:MM): ");
 				String stopTime = scanner.nextLine();
-				if (stopTime.charAt(0) == '2' &&  stopTime.charAt(1) > '4') {
-					System.out.println("Error adding record : Invalid End Time");
+				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
+					System.out.print("\nError adding record : Invalid End Time");
 					return;
 				}
 				if (stopTime.compareTo(startTime) < 0) {
-					System.out.println("Error updating record: Shift end time must be after start time");
+					System.out.print("\nError updating record: Shift end time must be after start time");
 					return;
 				}
 				// Add to responsibility table
-				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, Day, startTime, stopTime) VALUES ("
-						+ employeeID + "," + responsibilityID + "," + day + ",'" + startTime + "','" + stopTime + "')";
+				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, title, Day, startTime, stopTime) VALUES ("
+						+ employeeID + "," + responsibilityID + ",'" + title + "', " + day + ",'" + startTime + "','"
+						+ stopTime + "')";
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
 				;
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 		} else if (recordType.equals("Club460")) {
 			try {
 				// Ask the user for various information to add to the record.
-				System.out.println("Enter CustomerNo.:");
+				System.out.print("\nEnter CustomerNo.:");
 				int customerNo = scanner.nextInt();
-				System.out.println("\nEnter Points:");
+				System.out.print("\nEnter Points:");
 				// Ask the user for various information to add to the record.
 				int points = scanner.nextInt();
 				// Insert into Club460 table
@@ -633,7 +639,7 @@ public class Prog4 {
 				updateClub460InCustomerTable(dbconn, stmt, customerNo, "Y");
 			} catch (Exception e) {
 				;
-				System.out.println("Error adding record");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 		}
 
@@ -655,7 +661,7 @@ public class Prog4 {
 			String insertQuery = "INSERT INTO Club460 (CustomerNo, Points) VALUES (" + customerNo + "," + points + ")";
 			stmt.executeUpdate(insertQuery);
 		} catch (Exception e) {
-			System.out.println("Error adding record to Club 460");
+			System.out.print("\nError adding record to Club 460");
 		}
 	}
 
@@ -674,9 +680,9 @@ public class Prog4 {
 			int rowsDeleted = stmt.executeUpdate(deleteQuery);
 
 			// Display the number of rows deleted
-			System.out.println(rowsDeleted + " row(s) deleted successfully.");
+			System.out.println(rowsDeleted + " row(s) deleted successfully from Club 460.");
 		} catch (Exception e) {
-			System.out.println("Error deleting record from Club 460");
+			System.out.print("\nError deleting record from Club 460");
 		}
 	}
 
@@ -700,7 +706,7 @@ public class Prog4 {
 			// Delete record from customer table
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter CustomerNo.: ");
+				System.out.print("\nEnter CustomerNo.: ");
 				int customerNo = scanner.nextInt();
 				deleteClub460(dbconn, stmt, customerNo);
 				// Delete from child tables (where customerNo is foreign key)
@@ -716,33 +722,33 @@ public class Prog4 {
 				String deleteQuery = "DELETE FROM Customer WHERE CustomerNo = " + customerNo;
 				int rowsDeleted = stmt.executeUpdate(deleteQuery);
 
-				System.out.println("Deleted successfully.");
+				System.out.print("\nDeleted successfully.");
 			} catch (Exception e) {
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete record from booking table
 		} else if (recordType.equals("Booking")) {
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Ent" + "er BookingID: ");
+				System.out.print("\nEnt" + "er BookingID: ");
 				int bookingId = scanner.nextInt();
 				scanner.nextLine();
 				// Delete from child table
 				String deleteQuery = "DELETE FROM Booking WHERE BookingID = " + bookingId;
 				stmt.executeUpdate(deleteQuery);
-				System.out.println("Deleted successfully.");
+				System.out.print("\nDeleted successfully.");
 			} catch (Exception e) {
 				;
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete from usedAmenities table
 		} else if (recordType.equals("usedAmenity")) {
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter BookingID: ");
+				System.out.print("\nEnter BookingID: ");
 				int bookingId = scanner.nextInt();
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter AmenityID: ");
+				System.out.print("\nEnter AmenityID: ");
 				int amenityId = scanner.nextInt();
 				scanner.nextLine();
 				// Delete Record
@@ -751,13 +757,13 @@ public class Prog4 {
 				stmt.executeUpdate(deleteQuery);
 			} catch (Exception e) {
 
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete from Amenity Table
 		} else if (recordType.equals("Amenity")) {
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter AmenityID: ");
+				System.out.print("\nEnter AmenityID: ");
 				int amenityId = scanner.nextInt();
 				// Delete from child table where AmenityID is foreign key
 				scanner.nextLine();
@@ -769,16 +775,16 @@ public class Prog4 {
 				// Delete from table
 				String deleteQuery = "DELETE FROM Amenity WHERE AmenityID = " + amenityId;
 				stmt.executeUpdate(deleteQuery);
-				System.out.println("Deleted successfully.");
+				System.out.print("\nDeleted successfully.");
 			} catch (Exception e) {
 
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete from Room Details table
 		} else if (recordType.equals("RoomDetails")) {
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter RoomID: ");
+				System.out.print("\nEnter RoomID: ");
 				int roomId = scanner.nextInt();
 				scanner.nextLine();
 				// Delete from child table where RoomNo is foreign key
@@ -787,33 +793,33 @@ public class Prog4 {
 				// Delete from table
 				String deleteQuery = "DELETE FROM Room WHERE RoomNo = " + roomId;
 				stmt.executeUpdate(deleteQuery);
-				System.out.println("Deleted successfully.");
+				System.out.print("\nDeleted successfully.");
 			} catch (Exception e) {
 				;
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete from Employee table
 		} else if (recordType.equals("Employee")) {
 			try {
-				System.out.println("Enter Employee ID: ");
+				System.out.print("\nEnter Employee ID: ");
 				// Ask the user for various information to delete the record.
 				int employeeID = scanner.nextInt();
 				scanner.nextLine();
 				// Delete record
 				String deleteQuery = "DELETE FROM Employee WHERE EmployeeID = " + employeeID;
 				stmt.executeUpdate(deleteQuery);
-				System.out.println("Employee deleted successfully.");
+				System.out.print("\nEmployee deleted successfully.");
 			} catch (Exception e) {
 				;
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Delete from responsibility table
 		} else if (recordType.equals("Responsibility")) {
 			try {
-				System.out.println("Enter Employee ID: ");
+				System.out.print("\nEnter Employee ID: ");
 				// Ask the user for various information to delete the record.
 				int employeeID = scanner.nextInt();
-				System.out.println("Enter Responsibility ID: ");
+				System.out.print("\nEnter Responsibility ID: ");
 				// Ask the user for various information to delete the record.
 				int responsibilityID = scanner.nextInt();
 				scanner.nextLine();
@@ -821,16 +827,16 @@ public class Prog4 {
 				String deleteQuery = "DELETE FROM Responsibility WHERE EmployeeID = " + employeeID + " AND RespID = "
 						+ responsibilityID;
 				stmt.executeUpdate(deleteQuery);
-				System.out.println("Responsibility deleted successfully.");
+				System.out.print("\nResponsibility deleted successfully.");
 			} catch (Exception e) {
 				;
-				System.out.println("Error deleting record");
+				System.out.print("\nError deleting record");
 			}
 			// Deletes from Club460 table
 		} else if (recordType.equals("Club460")) {
 			try {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter the CustomerNo of the Club460 record you want to delete: ");
+				System.out.print("\nEnter the CustomerNo of the Club460 record you want to delete: ");
 				int customerNo = scanner.nextInt();
 				scanner.nextLine();
 				// Delete from table
@@ -838,7 +844,7 @@ public class Prog4 {
 				stmt.executeUpdate(deleteQuery);
 				updateClub460InCustomerTable(dbconn, stmt, customerNo, "N");
 			} catch (SQLException e) {
-				System.out.println("Error deleting " + recordType);
+				System.out.print("\nError deleting " + recordType);
 			}
 		}
 	}
@@ -859,12 +865,12 @@ public class Prog4 {
 		Scanner scanner = new Scanner(System.in);
 
 		// Prompt the user to enter the mode of payment
-		System.out.println("Enter mode of payment (CC/Checking/Cash):");
+		System.out.print("\nEnter mode of payment (CC/Checking/Cash):");
 		String mode = scanner.nextLine();
 
 		// Check if the payment mode is either Checking or CC
 		if (mode.equals("Checking") || mode.equals("CC")) {
-			System.out.println("\nEnter CC or Checking account number:");
+			System.out.print("\n\nEnter CC or Checking account number (leave empty for cash): ");
 			int cardNo = scanner.nextInt();
 
 			// Calculate discount based on the card number
@@ -905,15 +911,15 @@ public class Prog4 {
 			Scanner scanner = new Scanner(System.in);
 
 			// Prompt the user to enter the booking ID
-			System.out.println("Enter Booking ID: ");
+			System.out.print("\nEnter Booking ID: ");
 			int bookingID = scanner.nextInt();
 
 			// Prompt the user to enter the amenity ID
-			System.out.println("\nEnter Amenity ID: ");
+			System.out.print("\n\nEnter Amenity ID: ");
 			int amenityID = scanner.nextInt();
 
 			// Prompt the user to enter the quantity of the used amenity
-			System.out.println("\nEnter Quantity: ");
+			System.out.print("\n\nEnter Quantity: ");
 			int quantity = scanner.nextInt();
 
 			// Insert the used amenity record into the UsedAmenity table
@@ -922,7 +928,7 @@ public class Prog4 {
 			stmt.executeUpdate(insertQuery);
 
 		} catch (Exception e) {
-			System.out.println("Error adding used amenities");
+			System.out.print("\nError adding used amenities");
 		}
 	}
 
@@ -945,30 +951,30 @@ public class Prog4 {
 			// Updates Customer record
 			if (recordType.equals("Customer")) {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter the customerNo of the record you want to update: ");
+				System.out.print("\nEnter the customerNo of the record you want to update: ");
 				int id = scanner.nextInt();
 				scanner.nextLine();
 				// Ask the user for various information to delete the record.
-				System.out.println("\nEnter updated name: ");
+				System.out.print("\n\nEnter updated name: ");
 				String name = scanner.nextLine();
-				System.out.println("\nEnter updated address: ");
+				System.out.print("\n\nEnter updated address: ");
 				// Ask the user for various information to delete the record.
 				String address = scanner.nextLine();
-				System.out.println("\nIs the customer a student? (Y/N): ");
+				System.out.print("\n\nIs the customer a student? (Y/N): ");
 				// Ask the user for various information to delete the record.
 				String isAStudent = scanner.nextLine();
 				System.out
-						.println("If you want to update Club460 membership, Add or Delete in Club460 table to update");
+						.print("\nIf you want to update Club460 membership, Add or Delete in Club460 table to update");
 				String updateQuery = "UPDATE Customer SET Name='" + name + "', Address='" + address + "', Student='"
 						+ isAStudent + "' WHERE CustomerNo=" + id;
 				stmt.executeUpdate(updateQuery);
 				// Updates booking record
 			} else if (recordType.equals("Booking")) {
-				System.out.println("Enter the BookingID of the record you want to update: ");
+				System.out.print("\nEnter the BookingID of the record you want to update: ");
 				// Ask the user for various information to delete the record.
 				int id = scanner.nextInt();
 				scanner.nextLine();
-				System.out.println("Enter updated start date (yyyy-MM-dd): ");
+				System.out.print("\nEnter updated start date (yyyy-MM-dd): ");
 				// Ask the user for various information to delete the record.
 				String dateFrom = scanner.nextLine();
 
@@ -978,7 +984,7 @@ public class Prog4 {
 				if (resultSet.next()) {
 					roomNo = resultSet.getInt("RoomNo");
 				} else {
-					System.out.println("No room associated with BookingID " + id);
+					System.out.print("\nNo room associated with BookingID " + id);
 					return;
 				}
 
@@ -987,14 +993,14 @@ public class Prog4 {
 
 				dateFrom = dateFormat.format(dateFormat.parse(dateFrom));
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter updated end date (yyyy-MM-dd): ");
+				System.out.print("\nEnter updated end date (yyyy-MM-dd): ");
 				String dateTo = scanner.nextLine();
 
 				// Parse and format the dateTo input
 
 				dateTo = dateFormat.format(dateFormat.parse(dateTo));
 				if (dateTo.compareTo(dateFrom) < 0) {
-					System.out.println("Error updating booking : DateFrom must be before DateTo");
+					System.out.print("\nError updating booking : DateFrom must be before DateTo");
 				}
 				String availabilityQuery = "SELECT COUNT(*) FROM Booking WHERE RoomNo = " + roomNo
 						+ " AND BookingID != " + id + " AND (dateFrom BETWEEN TO_DATE('" + dateFrom
@@ -1021,10 +1027,10 @@ public class Prog4 {
 				// Updates amenity records
 			} else if (recordType.equals("Amenity")) {
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter the Amenity ID of the record you want to update: ");
+				System.out.print("\nEnter the Amenity ID of the record you want to update: ");
 				int id = scanner.nextInt();
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter updated price: ");
+				System.out.print("\nEnter updated price: ");
 				double price = scanner.nextDouble();
 				scanner.nextLine();
 				// Ask the user for various information to delete the record.
@@ -1032,10 +1038,10 @@ public class Prog4 {
 				stmt.executeUpdate(updateQuery);
 				// Update room details
 			} else if (recordType.equals("RoomDetails")) {
-				System.out.println("Enter the RoomNo of the record you want to update: ");
+				System.out.print("\nEnter the RoomNo of the record you want to update: ");
 				int id = scanner.nextInt();
 				// Ask the user for various information to delete the record.
-				System.out.println("Enter updated price: ");
+				System.out.print("\nEnter updated price: ");
 				double price = scanner.nextDouble();
 				scanner.nextLine();
 				String updateQuery = "UPDATE Room SET Price=" + price + " WHERE RoomNo=" + id;
@@ -1043,13 +1049,13 @@ public class Prog4 {
 			}
 			// Update employee details
 			else if (recordType.equals("Employee")) {
-				System.out.println("Enter the Employee ID of the record you want to update: ");
+				System.out.print("\nEnter the Employee ID of the record you want to update: ");
 				int id = scanner.nextInt();
 				scanner.nextLine();
-				System.out.println("Enter updated employee name: ");
+				System.out.print("\nEnter updated employee name: ");
 				// Ask the user for various information to delete the record.
 				String employeeName = scanner.nextLine();
-				System.out.println("Enter updated date of birth (yyyy-MM-dd): ");
+				System.out.print("\nEnter updated date of birth (yyyy-MM-dd): ");
 				String dob = scanner.nextLine();
 
 				// Parse and format the dob input
@@ -1062,32 +1068,32 @@ public class Prog4 {
 				stmt.executeUpdate(updateQuery);
 				// Update responsibility details
 			} else if (recordType.equals("Responsibility")) {
-				System.out.println("Enter the Employee ID of the record you want to update: ");
+				System.out.print("\nEnter the Employee ID of the record you want to update: ");
 				// Ask the user for various information to delete the record.
 				int id = scanner.nextInt();
-				System.out.println("Enter the Responsibility ID of the record you want to update: ");
+				System.out.print("\nEnter the Responsibility ID of the record you want to update: ");
 				// Ask the user for various information to delete the record.
 				int respId = scanner.nextInt();
-				System.out.println("Enter updated day (0 for Sunday, 1 for Monday, etc.): ");
+				System.out.print("\nEnter updated day (0 for Sunday, 1 for Monday, etc.): ");
 				// Ask the user for various information to delete the record.
 				int day = scanner.nextInt();
 				scanner.nextLine();
-				System.out.println("\nEnter updated start time (HH:MM): ");
+				System.out.print("\n\nEnter updated start time (HH:MM): ");
 				// Ask the user for various information to delete the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
-					System.out.println("Error updating record : Invalid Start Time");
+					System.out.print("\nError updating record : Invalid Start Time");
 					return;
 				}
-				System.out.println("Enter updated stop time (HH:MM): ");
+				System.out.print("\nEnter updated stop time (HH:MM): ");
 				// Ask the user for various information to delete the record.
 				String stopTime = scanner.nextLine();
 				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
-					System.out.println("Error updating record : Invalid End Time");
+					System.out.print("\nError updating record : Invalid End Time");
 					return;
 				}
 				if (stopTime.compareTo(startTime) < 0) {
-					System.out.println("Error updating record: Shift end time must be after start time");
+					System.out.print("\nError updating record: Shift end time must be after start time");
 					return;
 				}
 				String updateQuery = "UPDATE Responsibility SET Day=" + day + ", startTime='" + startTime
@@ -1095,10 +1101,10 @@ public class Prog4 {
 				stmt.executeUpdate(updateQuery);
 				// Update Club460 member details
 			} else if (recordType.equals("Club460")) {
-				System.out.println("Enter the CustomerNo of the record you want to update: ");
+				System.out.print("\nEnter the CustomerNo of the record you want to update: ");
 				// Ask the user for various information to delete the record.
 				int id = scanner.nextInt();
-				System.out.println("Enter updated points: ");
+				System.out.print("\nEnter updated points: ");
 				// Ask the user for various information to delete the record.
 				int points = scanner.nextInt();
 				scanner.nextLine();
@@ -1107,21 +1113,21 @@ public class Prog4 {
 				stmt.executeUpdate(updateQuery);
 				// updates usedAmenity details
 			} else if (recordType.equals("usedAmenity")) {
-				System.out.println("Enter the BookingId of the record you want to update: ");
+				System.out.print("\nEnter the BookingId of the record you want to update: ");
 				// Ask the user for various information to delete the record.
 				int id = scanner.nextInt();
-				System.out.println("Enter updated quantity: ");
+				System.out.print("\nEnter updated quantity: ");
 				int quantity = scanner.nextInt();
 				scanner.nextLine();
 				String updateQuery = "UPDATE UsedAmenity SET Quantity=" + quantity + " WHERE BookingID=" + id;
 				stmt.executeUpdate(updateQuery);
 			} else {
-				System.out.println("Invalid record type.");
+				System.out.print("\nInvalid record type.");
 				return;
 			}
-			System.out.println("Record updated successfully.");
+			System.out.print("\nRecord updated successfully.");
 		} catch (Exception e) {
-			System.out.println("Error updating " + recordType);
+			System.out.print("\nError updating " + recordType);
 		}
 	}
 
@@ -1141,7 +1147,7 @@ public class Prog4 {
 			String updateQuery = "UPDATE Customer SET Club460='" + setMembership + "' WHERE CustomerNo=" + customerNo;
 			stmt.executeUpdate(updateQuery);
 		} catch (SQLException e) {
-			System.out.println("Error adding member to Club460");
+			System.out.print("\nError adding member to Club460");
 		}
 	}
 
@@ -1157,19 +1163,19 @@ public class Prog4 {
 	 */
 	public static String updatePayment(Connection dbconn, Statement stmt, ResultSet answer, Scanner scanner) {
 		// Prompt the user for the CustomerNo to update
-		System.out.println("Enter the CustomerNo of the record you want to update: ");
+		System.out.print("\nEnter the CustomerNo of the record you want to update: ");
 		int id = scanner.nextInt();
 		scanner.nextLine();
 
 		// Prompt the user for the updated mode of payment and card number
-		System.out.println("Enter updated mode of payment (CC, Cash, DD, or Cheque): ");
+		System.out.print("\nEnter updated mode of payment (CC, Cash, DD, or Cheque): ");
 		String mode = scanner.nextLine();
-		System.out.println("Enter updated card number: ");
+		System.out.print("\nEnter updated card number: ");
 		int cardNo = scanner.nextInt();
 		scanner.nextLine();
 
 		int discount = 0;
-		System.out.println("Card last 4 digits: " + cardNo % 10000);
+		System.out.print("\nCard last 4 digits: " + cardNo % 10000);
 		if (cardNumber.containsKey(cardNo % 10000)) {
 			discount = cardDiscount.get(cardNumber.get(cardNo % 10000));
 		}
@@ -1180,7 +1186,7 @@ public class Prog4 {
 		try {
 			stmt.executeUpdate(updateQuery);
 		} catch (SQLException e) {
-			System.out.println("Error updating payment");
+			System.out.print("\nError updating payment");
 		}
 
 		// Return the card type or an empty string
@@ -1211,43 +1217,43 @@ public class Prog4 {
 //		String formattedDate = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-		System.out.println("Please enter when the week starts (yyyy-MM-dd): ");
+		System.out.print("\nPlease enter when the week starts (yyyy-MM-dd): ");
 		String dateString = scanner.nextLine();
 
 		try {
 			inputDate = dateFormat.parse(dateString);
 //			formattedDate = dateFormat.format(inputDate);
 		} catch (ParseException e) {
-			System.out.println("INPUT EXCEPTION: There was some error parsing the date.\n");
-			scanner.close();
+			System.out.print("\nINPUT EXCEPTION: There was some error parsing the date.\n");
 			System.exit(-1);
 		}
 
 		// Now we start writing the queries
 
-		String query = "SELECT Employee.EmployeeID, EmpName, startime, stoptime, Day FROM Employee JOIN "
+		String query = "SELECT Employee.EmployeeID, EmpName, startime, stoptime, Day, title FROM Employee JOIN "
 				+ "Responsibility ON Employee.EmployeeID = Responsibility.EmployeeID " + "ORDER BY Day";
 		try {
 			answer = stmt.executeQuery(query);
 			if (answer == null) {
-				System.out.println("No Employees have any responsibilities!\n");
+				System.out.print("\nNo Employees have any responsibilities!\n");
 			} else {
 				Calendar calendar = Calendar.getInstance();
 				while (answer.next()) {
-					System.out.println("EMPLOYEE ID: " + answer.getInt(1));
-					System.out.println("NAME: " + answer.getString(2));
+					System.out.print("\nEMPLOYEE ID: " + answer.getInt(1));
+					System.out.print("\nNAME: " + answer.getString(2));
 					calendar.setTime(inputDate);
 					calendar.add(Calendar.DATE, answer.getInt(5));
-					System.out.println("DATE: " + dateFormat.format(calendar.getTime()));
-					System.out.println("START TIME: " + answer.getString(3));
-					System.out.println("STOP TIME: " + answer.getString(4) + "\n");
+					System.out.print("\nDATE: " + dateFormat.format(calendar.getTime()));
+					System.out.print("\nSTART TIME: " + answer.getString(3));
+					System.out.print("\nSTOP TIME: " + answer.getString(4));
+					System.out.print("\nJOB TITLE: " + answer.getString(6) + "\n");
 				}
 			}
 		} catch (SQLException e) {
-			System.err.println("*** SQLException:  " + "Could not fetch results for query 3");
-			System.err.println("\tMessage:   " + e.getMessage());
-			System.err.println("\tSQLState:  " + e.getSQLState());
-			System.err.println("\tErrorCode: " + e.getErrorCode());
+			System.err.print("\n*** SQLException:  " + "Could not fetch results for query 3");
+			System.err.print("\n\tMessage:   " + e.getMessage());
+			System.err.print("\n\tSQLState:  " + e.getSQLState());
+			System.err.print("\n\tErrorCode: " + e.getErrorCode());
 			System.exit(-1);
 		}
 	}
@@ -1266,11 +1272,11 @@ public class Prog4 {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 			// Prompt the user for the start date and end date
-			System.out.println("Enter start date (yyyy-MM-dd): ");
+			System.out.print("\nEnter start date (yyyy-MM-dd): ");
 			String startDateString = scanner.nextLine();
 			Date startDate = dateFormat.parse(startDateString);
 
-			System.out.println("Enter end date (yyyy-MM-dd): ");
+			System.out.print("\nEnter end date (yyyy-MM-dd): ");
 			String endDateString = scanner.nextLine();
 			Date endDate = dateFormat.parse(endDateString);
 
@@ -1280,22 +1286,24 @@ public class Prog4 {
 
 			// Construct the query to calculate average ratings for amenities in the given
 			// date range
-			String query = "SELECT AmenityID, AVG(Rating) AS AvgRating FROM Rating WHERE RatingDate BETWEEN TO_DATE('"
-					+ formattedStartDate + "', 'yyyy-MM-dd') AND TO_DATE('" + formattedEndDate
-					+ "', 'yyyy-MM-dd') GROUP BY AmenityID ORDER BY AvgRating DESC";
+			String query = "SELECT AmenityID, AVG(Rating) AS AvgRating, Name FROM Rating JOIN Amenity "
+					+ "ON Rating.AmenityID = Amenity.AmenityID WHERE RatingDate BETWEEN TO_DATE('" + formattedStartDate
+					+ "', 'yyyy-MM-dd') AND TO_DATE('" + formattedEndDate
+					+ "', 'yyyy-MM-dd') GROUP BY Rating.AmenityID ORDER BY AvgRating DESC";
 
 			// Execute the query
 			answer = stmt.executeQuery(query);
 
 			// Print the results
-			System.out.println("Amenity ID\tAverage Rating");
+			System.out.print("\nAmenity ID\tName\tAverage Rating");
 			while (answer.next()) {
 				int amenityID = answer.getInt("AmenityID");
 				double avgRating = answer.getDouble("AvgRating");
-				System.out.println(amenityID + "\t\t" + avgRating);
+				String name = answer.getString(3);
+				System.out.println(amenityID + "\t\t" + name + "\t\t" + avgRating);
 			}
 		} catch (Exception e) {
-			System.out.println("Error printing average ratings");
+			System.out.print("\nError printing average ratings");
 		}
 	}
 
@@ -1315,15 +1323,14 @@ public class Prog4 {
 		String formattedDate = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-		System.out.println("Please enter the date you want to check for (YYYY-MM-DD): ");
+		System.out.print("\nPlease enter the date you want to check for (YYYY-MM-DD): ");
 		String dateString = scanner.nextLine();
 
 		try {
 			inputDate = dateFormat.parse(dateString);
 			formattedDate = dateFormat.format(inputDate);
 		} catch (ParseException e) {
-			System.out.println("INPUT EXCEPTION: There was some error parsing the date.\n");
-			scanner.close();
+			System.out.print("\nINPUT EXCEPTION: There was some error parsing the date.\n");
 			System.exit(-1);
 		}
 
@@ -1333,20 +1340,20 @@ public class Prog4 {
 				+ formattedDate + "', 'yyyy-MM-dd') AND Student = ? AND " + "Club460 = ? ORDER BY RoomNo";
 		try {
 			PreparedStatement pstmt = dbconn.prepareStatement(query);
-			System.out.println("Here's the result of your queries:\n ");
-			System.out.println("\tGENERAL CUSTOMERS: \n");
+			System.out.print("\nHere's the result of your queries:\n ");
+			System.out.print("\n\tGENERAL CUSTOMERS: \n");
 			getCustomers(pstmt, answer, "N", "N");
-			System.out.println("\tCOLLEGE STUDENTS ONLY: \n");
+			System.out.print("\n\tCOLLEGE STUDENTS ONLY: \n");
 			getCustomers(pstmt, answer, "Y", "N");
-			System.out.println("\tCLUB 460 MEMBERS ONLY: \n");
+			System.out.print("\n\tCLUB 460 MEMBERS ONLY: \n");
 			getCustomers(pstmt, answer, "N", "Y");
-			System.out.println("\tCOLLEGE STUDENTS WHO ARE ALSO IN CLUB 460: \n");
+			System.out.print("\n\tCOLLEGE STUDENTS WHO ARE ALSO IN CLUB 460: \n");
 			getCustomers(pstmt, answer, "Y", "Y");
 		} catch (SQLException e) {
-			System.err.println("*** SQLException:  " + "Could not fetch results for query 2");
-			System.err.println("\tMessage:   " + e.getMessage());
-			System.err.println("\tSQLState:  " + e.getSQLState());
-			System.err.println("\tErrorCode: " + e.getErrorCode());
+			System.err.print("\n*** SQLException:  " + "Could not fetch results for query 2");
+			System.err.print("\n\tMessage:   " + e.getMessage());
+			System.err.print("\n\tSQLState:  " + e.getSQLState());
+			System.err.print("\n\tErrorCode: " + e.getErrorCode());
 			System.exit(-1);
 		}
 	}
@@ -1376,19 +1383,19 @@ public class Prog4 {
 
 		// Check if there are any customers matching the provided criteria
 		if (answer == null || answer.getFetchSize() == 0) {
-			System.out.println("\t<!-- No Such Customers Exist --!>\n");
+			System.out.print("\n\t<!-- No Such Customers Exist --!>\n");
 			printAnything = true;
 		} else {
 			// Print the customer's name and room number
 			while (answer.next()) {
 				System.out
-						.println("Customer Name: " + answer.getString(1) + "\t\t Room Number: " + answer.getString(2));
+						.print("\nCustomer Name: " + answer.getString(1) + "\t\t Room Number: " + answer.getString(2));
 				System.out.println();
 				printAnything = true;
 			}
 		}
 		if (!printAnything) {
-			System.out.println("\t<!-- No Such Customers Exist --!>\n");
+			System.out.print("\n\t<!-- No Such Customers Exist --!>\n");
 		}
 	}
 
@@ -1407,10 +1414,10 @@ public class Prog4 {
 
 			// Accept user input
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Enter CustomerNo: ");
+			System.out.print("\nEnter CustomerNo: ");
 			int customerNo = scanner.nextInt();
 			scanner.nextLine();
-			System.out.println("Enter BookingID: ");
+			System.out.print("\nEnter BookingID: ");
 			int bookingId = scanner.nextInt();
 			scanner.nextLine(); // Consume the newline character
 
@@ -1425,7 +1432,7 @@ public class Prog4 {
 				dateFrom = resultSet.getDate("dateFrom");
 				dateTo = resultSet.getDate("dateTo");
 			} else {
-				System.out.println("No booking found with the given CustomerNo and BookingID.");
+				System.out.print("\nNo booking found with the given CustomerNo and BookingID.");
 				return;
 			}
 
@@ -1440,7 +1447,7 @@ public class Prog4 {
 			if (answer.next()) {
 				roomNo = answer.getInt("RoomNo");
 			} else {
-				System.out.println("No booking found with the given CustomerNo and BookingID.");
+				System.out.print("\nNo booking found with the given CustomerNo and BookingID.");
 				return;
 			}
 
@@ -1461,7 +1468,7 @@ public class Prog4 {
 			String discountString = "";
 			String payment = "";
 			if (answer.next()) {
-				System.out.println("Do you wanna update method of payment (Y/N)?: ");
+				System.out.print("\nDo you wanna update method of payment (Y/N)?: ");
 				String updatePayment = scanner.nextLine();
 				if (updatePayment.equals("Y")) {
 					updatePayment(dbconn, stmt, answer, scanner);
@@ -1531,7 +1538,7 @@ public class Prog4 {
 
 			}
 			// Asks the user if they wanna use points
-			System.out.println("Do you wanna use points? (Y/N)");
+			System.out.print("\nDo you wanna use points? (Y/N)");
 			String usePointsFlag = scanner.nextLine();
 			if (usePointsFlag.equals("Y")) {
 				// If yes then subtract the points conversion from roomCost
@@ -1544,8 +1551,8 @@ public class Prog4 {
 			}
 
 			// Print the final bill
-			System.out.println("Discounts Applied: " + discountString);
-			System.out.println("Total Cost: " + ((costAmenities + costRooms) * (100 - discount)) / 100);
+			System.out.print("\nDiscounts Applied: " + discountString);
+			System.out.print("\nTotal Cost: " + ((costAmenities + costRooms) * (100 - discount)) / 100);
 
 			String updateQuery = "UPDATE Club460 SET Points = ? WHERE CustomerNo = ?";
 			pstmt = dbconn.prepareStatement(updateQuery);
@@ -1561,7 +1568,7 @@ public class Prog4 {
 			addRating(dbconn, scanner);
 
 		} catch (SQLException e) {
-			System.out.println("Error printing final bill for customer");
+			System.out.print("\nError printing final bill for customer");
 		}
 
 	}
@@ -1577,7 +1584,7 @@ public class Prog4 {
 	public static void addRating(Connection dbconn, Scanner scanner) {
 		System.out.println();
 		// Continuosly keep asking for if they wanna add a rating.
-		System.out.println("Do you wanna add rating for an Amenity? (Y/N)");
+		System.out.print("\nDo you wanna add rating for an Amenity? (Y/N)");
 		String ratingFlag = scanner.nextLine();
 		if (ratingFlag.equals("Y")) {
 
@@ -1585,22 +1592,22 @@ public class Prog4 {
 			return;
 		}
 		// Prompt the user for the AmenityID to rate
-		System.out.println("Enter the AmenityID you want to rate: ");
+		System.out.print("\nEnter the AmenityID you want to rate: ");
 		int amenityID = scanner.nextInt();
 		scanner.nextLine();
 
 		// Prompt the user for the RatingID for this rating
-		System.out.println("Enter the RatingID for this rating: ");
+		System.out.print("\nEnter the RatingID for this rating: ");
 		int ratingID = scanner.nextInt();
 		scanner.nextLine();
 
 		// Prompt the user for the rating value (1-10)
-		System.out.println("Enter your rating (1-10): ");
+		System.out.print("\nEnter your rating (1-10): ");
 		int rating = scanner.nextInt();
 		scanner.nextLine();
 
 		// Prompt the user for the rating date (yyyy-MM-dd)
-		System.out.println("Enter the rating date (yyyy-MM-dd): ");
+		System.out.print("\nEnter the rating date (yyyy-MM-dd): ");
 		String ratingDate = scanner.nextLine();
 
 		// Create an insert query to add the rating to the Rating table
@@ -1611,10 +1618,10 @@ public class Prog4 {
 			// Execute the insert query
 			Statement stmt = dbconn.createStatement();
 			stmt.executeUpdate(insertQuery);
-			System.out.println("Rating added successfully.");
+			System.out.print("\nRating added successfully.");
 			addRating(dbconn, scanner);
 		} catch (SQLException e) {
-			System.out.println("Error adding rating.");
+			System.out.print("\nError adding rating.");
 		}
 	}
 
@@ -1632,13 +1639,13 @@ public class Prog4 {
 	 */
 	public static void printEmployeesByRespID(Connection dbconn, Statement stmt, Scanner scanner, ResultSet answer) {
 		// Prompt the user for the RespID to search employees by
-		System.out.println("Enter the RespID you want to search employees by: ");
-		int respID = scanner.nextInt();
+		System.out.print("\nEnter the job title you want to search employees by: ");
+		String respName = scanner.nextLine();
 		scanner.nextLine();
 
 		// Create a query to get employee names with the specified RespID
-		String query = "SELECT EmpName FROM Employee e INNER JOIN Responsibility r ON e.EmployeeID = r.EmployeeID WHERE r.RespID = "
-				+ respID;
+		String query = "SELECT EmpName FROM Employee e INNER JOIN Responsibility r ON e.EmployeeID = r.EmployeeID WHERE r.title = "
+				+ respName;
 
 		try {
 			// Execute the query and store the result in 'answer'
@@ -1646,7 +1653,7 @@ public class Prog4 {
 			answer = stmt.executeQuery(query);
 
 			// Print the employee names with the specified RespID
-			System.out.println("Employees with RespID " + respID + ":");
+			System.out.print("\nEmployees with the job title " + respName + ":");
 			int i = 1;
 			while (answer.next()) {
 				String employeeName = answer.getString("EmpName");
@@ -1654,7 +1661,7 @@ public class Prog4 {
 				i += 1;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error printing employee names by responsibilites.");
+			System.out.print("\nError printing employee names by responsibilites.");
 		}
 	}
 
