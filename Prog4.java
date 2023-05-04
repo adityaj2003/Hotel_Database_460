@@ -591,7 +591,6 @@ public class Prog4 {
 				scanner.nextLine();
 				System.out.print("\nEnter the Responsibility title: ");
 				String title = scanner.nextLine();
-				
 				System.out.print("\nEnter Day (0 for Sunday, 1 for Monday, etc.): ");
 				int day = scanner.nextInt();
 				// Ask the user for various information to add to the record.
@@ -614,13 +613,12 @@ public class Prog4 {
 					return;
 				}
 				// Add to responsibility table
-				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, JobTitle, Day, startTime, stopTime) VALUES("
+				String insertQuery = "INSERT INTO Responsibility (EmployeeID, RespID, JobTitle, Day, startTime, stopTime) VALUES ("
 						+ employeeID + "," + responsibilityID + ",'" + title + "', " + day + ",'" + startTime + "','"
 						+ stopTime + "')";
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.print("\nError adding record, maybe it already exists?");
 			}
 		} else if (recordType.equals("Club460")) {
@@ -1030,11 +1028,11 @@ public class Prog4 {
 				// Ask the user for various information to update the record.
 				System.out.print("\nEnter the Amenity ID of the record you want to update: ");
 				int id = scanner.nextInt();
-				// Ask the user for various information to udpdate the record.
+				// Ask the user for various information to updatethe record.
 				System.out.print("\nEnter updated price: ");
 				double price = scanner.nextDouble();
 				scanner.nextLine();
-				// Ask the user for various information to update the record.
+				// Ask the user for various information to updatethe record.
 				String updateQuery = "UPDATE Amenity SET Price=" + price + " WHERE AmenityID=" + id;
 				stmt.executeUpdate(updateQuery);
 				// Update room details
@@ -1054,7 +1052,7 @@ public class Prog4 {
 				int id = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\nEnter updated employee name: ");
-				// Ask the user for various information to update the record.
+				// Ask the user for various information to updatethe record.
 				String employeeName = scanner.nextLine();
 				System.out.print("\nEnter updated date of birth (yyyy-MM-dd): ");
 				String dob = scanner.nextLine();
@@ -1070,7 +1068,7 @@ public class Prog4 {
 				// Update responsibility details
 			} else if (recordType.equals("Responsibility")) {
 				System.out.print("\nEnter the Employee ID of the record you want to update: ");
-				// Ask the user for various information to update the record.
+				// Ask the user for various information to updatethe record.
 				int id = scanner.nextInt();
 				System.out.print("\nEnter the Responsibility ID of the record you want to update: ");
 				// Ask the user for various information to update the record.
@@ -1080,7 +1078,7 @@ public class Prog4 {
 				int day = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\n\nEnter updated start time (HH:MM): ");
-				// Ask the user for various information to update the record.
+				// Ask the user for various information toupdate the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
 					System.out.print("\nError updating record : Invalid Start Time");
@@ -1103,24 +1101,27 @@ public class Prog4 {
 				// Update Club460 member details
 			} else if (recordType.equals("Club460")) {
 				System.out.print("\nEnter the CustomerNo of the record you want to update: ");
-				// Ask the user for various information to update the record.
+				// Ask the user for various information toupdatethe record.
 				int id = scanner.nextInt();
 				System.out.print("\nEnter updated points: ");
-				// Ask the user for various information to update the record.
+				// Ask the user for various information to updatethe record.
 				int points = scanner.nextInt();
 				scanner.nextLine();
 				String updateQuery = "UPDATE Club460 SET Points=" + points + " WHERE CustomerNo=" + id;
-				// Ask the user for various information to udpate the record.
+				// Ask the user for various information to update the record.
 				stmt.executeUpdate(updateQuery);
 				// updates usedAmenity details
 			} else if (recordType.equals("usedAmenity")) {
 				System.out.print("\nEnter the BookingId of the record you want to update: ");
 				// Ask the user for various information to update the record.
 				int id = scanner.nextInt();
+				scanner.nextLine();
+				System.out.print("\nEnter the AmenityID of the record you want to update: ");
+				int aid = scanner.nextInt();
 				System.out.print("\nEnter updated quantity: ");
 				int quantity = scanner.nextInt();
 				scanner.nextLine();
-				String updateQuery = "UPDATE UsedAmenity SET Quantity=" + quantity + " WHERE BookingID=" + id;
+				String updateQuery = "UPDATE UsedAmenity SET Quantity=" + quantity + " WHERE BookingID=" + id + "AND AmenityID =  " + aid + " ";
 				stmt.executeUpdate(updateQuery);
 			} else {
 				System.out.print("\nInvalid record type.");
