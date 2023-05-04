@@ -951,18 +951,18 @@ public class Prog4 {
 		try {
 			// Updates Customer record
 			if (recordType.equals("Customer")) {
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				System.out.print("\nEnter the customerNo of the record you want to update: ");
 				int id = scanner.nextInt();
 				scanner.nextLine();
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				System.out.print("\n\nEnter updated name: ");
 				String name = scanner.nextLine();
 				System.out.print("\n\nEnter updated address: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String address = scanner.nextLine();
 				System.out.print("\n\nIs the customer a student? (Y/N): ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String isAStudent = scanner.nextLine();
 				System.out
 						.print("\nIf you want to update Club460 membership, Add or Delete in Club460 table to update");
@@ -972,11 +972,11 @@ public class Prog4 {
 				// Updates booking record
 			} else if (recordType.equals("Booking")) {
 				System.out.print("\nEnter the BookingID of the record you want to update: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int id = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\nEnter updated start date (yyyy-MM-dd): ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String dateFrom = scanner.nextLine();
 
 				String getRoomNoQuery = "SELECT RoomNo FROM Booking WHERE BookingID = " + id;
@@ -993,7 +993,7 @@ public class Prog4 {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 				dateFrom = dateFormat.format(dateFormat.parse(dateFrom));
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				System.out.print("\nEnter updated end date (yyyy-MM-dd): ");
 				String dateTo = scanner.nextLine();
 
@@ -1027,21 +1027,21 @@ public class Prog4 {
 				stmt.executeUpdate(updateQuery);
 				// Updates amenity records
 			} else if (recordType.equals("Amenity")) {
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				System.out.print("\nEnter the Amenity ID of the record you want to update: ");
 				int id = scanner.nextInt();
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to udpdate the record.
 				System.out.print("\nEnter updated price: ");
 				double price = scanner.nextDouble();
 				scanner.nextLine();
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String updateQuery = "UPDATE Amenity SET Price=" + price + " WHERE AmenityID=" + id;
 				stmt.executeUpdate(updateQuery);
 				// Update room details
 			} else if (recordType.equals("RoomDetails")) {
 				System.out.print("\nEnter the RoomNo of the record you want to update: ");
 				int id = scanner.nextInt();
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				System.out.print("\nEnter updated price: ");
 				double price = scanner.nextDouble();
 				scanner.nextLine();
@@ -1054,7 +1054,7 @@ public class Prog4 {
 				int id = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\nEnter updated employee name: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String employeeName = scanner.nextLine();
 				System.out.print("\nEnter updated date of birth (yyyy-MM-dd): ");
 				String dob = scanner.nextLine();
@@ -1070,24 +1070,24 @@ public class Prog4 {
 				// Update responsibility details
 			} else if (recordType.equals("Responsibility")) {
 				System.out.print("\nEnter the Employee ID of the record you want to update: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int id = scanner.nextInt();
 				System.out.print("\nEnter the Responsibility ID of the record you want to update: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int respId = scanner.nextInt();
 				System.out.print("\nEnter updated day (0 for Sunday, 1 for Monday, etc.): ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int day = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\n\nEnter updated start time (HH:MM): ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String startTime = scanner.nextLine();
 				if (startTime.charAt(0) == '2' && startTime.charAt(1) > '4') {
 					System.out.print("\nError updating record : Invalid Start Time");
 					return;
 				}
 				System.out.print("\nEnter updated stop time (HH:MM): ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				String stopTime = scanner.nextLine();
 				if (stopTime.charAt(0) == '2' && stopTime.charAt(1) > '4') {
 					System.out.print("\nError updating record : Invalid End Time");
@@ -1103,19 +1103,19 @@ public class Prog4 {
 				// Update Club460 member details
 			} else if (recordType.equals("Club460")) {
 				System.out.print("\nEnter the CustomerNo of the record you want to update: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int id = scanner.nextInt();
 				System.out.print("\nEnter updated points: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int points = scanner.nextInt();
 				scanner.nextLine();
 				String updateQuery = "UPDATE Club460 SET Points=" + points + " WHERE CustomerNo=" + id;
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to udpate the record.
 				stmt.executeUpdate(updateQuery);
 				// updates usedAmenity details
 			} else if (recordType.equals("usedAmenity")) {
 				System.out.print("\nEnter the BookingId of the record you want to update: ");
-				// Ask the user for various information to delete the record.
+				// Ask the user for various information to update the record.
 				int id = scanner.nextInt();
 				System.out.print("\nEnter updated quantity: ");
 				int quantity = scanner.nextInt();
