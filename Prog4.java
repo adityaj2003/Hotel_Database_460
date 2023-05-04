@@ -56,8 +56,8 @@ public class Prog4 {
 		final String oracleURL = // Magic lectura -> aloe access spell
 				"jdbc:oracle:thin:@aloe.cs.arizona.edu:1521:oracle";
 
-		String username = "adityajadhav"; // Oracle DBMS username
-		String password = "a7683"; // Oracle DBMS password
+		String username = "adityakumar"; // Oracle DBMS username
+		String password = "a8287"; // Oracle DBMS password
 		Statement stmt = null;
 		try {
 
@@ -513,6 +513,7 @@ public class Prog4 {
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
+				;
 				System.out.print("\nError adding record, maybe it already exists?");
 			}
 
@@ -525,21 +526,19 @@ public class Prog4 {
 				int amenityId = scanner.nextInt();
 				scanner.nextLine();
 				System.out.print("\nEnter amenity's name: ");
-				String amenityname = scanner.nextLine();
+				String name = scanner.nextLine();
 				System.out.print("\nEnter price of amenity: ");
 				// Ask the user for various information to add to the record.
 				int price = scanner.nextInt();
 				// Insert to the Amenity table
-				String insertQuery = "INSERT INTO Amenity (AmenityID, name, price) VALUES (" + amenityId + ", '" + amenityname + "', " + price + ")";
+				String insertQuery = "INSERT INTO Amenity VALUES (" + amenityId + ", '" + name + "', " + price + ")";
 				// Execute Query
 				stmt.executeUpdate(insertQuery);
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.print("\nError adding record, maybe amenity id already exists?");
+				System.out.print("\nError adding record, maybe it already exists?");
 			}
 
 		}
-
 
 		else if (recordType.equals("RoomDetails")) {
 			try {
@@ -680,7 +679,7 @@ public class Prog4 {
 			int rowsDeleted = stmt.executeUpdate(deleteQuery);
 
 			// Display the number of rows deleted
-			System.out.println(rowsDeleted + " row(s) deleted successfully from Club 460.");
+			System.out.println(rowsDeleted + " row(s) deleted from Club 460");
 		} catch (Exception e) {
 			System.out.print("\nError deleting record from Club 460");
 		}
@@ -1644,8 +1643,8 @@ public class Prog4 {
 		scanner.nextLine();
 
 		// Create a query to get employee names with the specified RespID
-		String query = "SELECT EmpName FROM Employee e INNER JOIN Responsibility r ON e.EmployeeID = r.EmployeeID WHERE r.title = "
-				+ respName;
+		String query = "SELECT EmpName FROM Employee e INNER JOIN Responsibility r ON e.EmployeeID = r.EmployeeID WHERE r.title = '"
+				+ respName + "' ";
 
 		try {
 			// Execute the query and store the result in 'answer'
